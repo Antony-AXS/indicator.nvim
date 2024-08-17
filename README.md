@@ -1,9 +1,9 @@
 # indicator.nvim
 indicator.nvim is a light-weight plugin for inidicating the window numbers on the screen,
 so that one can use it to navigate throught windows in a tab easily.
-there is so a window highlight feature when jumping through windows 
+there is so a window highlight feature that works while jumping through windows in a tab
 
-## Required
+### Required
 
 -   `neovim >= 0.10`
 -   `plenary.nvim`
@@ -11,7 +11,7 @@ there is so a window highlight feature when jumping through windows
 ## ⇁ Installation
 * neovim 0.10 + required
 * install using your favorite plugin manager (lazy.nvim in this example)
-* keymap examples are also added in config, feel free to change the keymaps according to your own comfort
+* keymap examples are also added in config, Feel free to change the keymaps to suit your own comfort.
 ```lua
 {
 	"Antony-AXS/indicator.nvim",
