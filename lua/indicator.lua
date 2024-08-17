@@ -4,23 +4,6 @@ local const = require("constants")
 
 local M = {}
 
-M.setup = function(config)
-	if config.indicator_event then
-		if const.autocmd_id == nil then
-			const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
-				desc = "Trigger always when entering a new Buffer",
-				group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
-				callback = function()
-					M.indicator(500, nil, true)
-				end,
-			})
-			vim.notify("Indicator Event Triggered")
-		else
-			vim.notify("Indicator Event Already Triggered")
-		end
-	end
-end
-
 local indicator = function(timer, win_id, bloat)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
@@ -95,6 +78,23 @@ local indicator = function(timer, win_id, bloat)
 	end, (timer or 1500))
 end
 
+M.setup = function(config)
+	if config.indicator_event then
+		if const.autocmd_id == nil then
+			const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
+				desc = "Trigger always when entering a new Buffer",
+				group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
+				callback = function()
+					indicator(500, nil, true)
+				end,
+			})
+			vim.notify("Indicator Event Triggered")
+		else
+			vim.notify("Indicator Event Already Triggered")
+		end
+	end
+end
+
 local window_highlight_trigger = function()
 	local win_id = vim.api.nvim_get_current_win()
 	vim.api.nvim_set_hl(0, "ThisWinHighLight", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
@@ -116,7 +116,7 @@ M.indicateAll = function(bloat)
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
 	for _, win_id in ipairs(window_ids) do
-		M.indicator(1500, win_id, bloat)
+		indicator(1500, win_id, bloat)
 	end
 end
 
@@ -126,7 +126,7 @@ M.indicator_event_activate = function()
 			desc = "Trigger always when entering a new Buffer",
 			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
 			callback = function()
-				M.indicator(500, nil, true)
+				indicator(500, nil, true)
 			end,
 		})
 		vim.notify("Indicator Event Triggered")
