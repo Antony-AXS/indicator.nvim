@@ -10,6 +10,7 @@ local indicator = function(timer, win_id, bloat, event_act)
 	local _width = vim.api.nvim_win_get_width(curr_win_id)
 
 	local number = tostring(vim.api.nvim_win_get_number(win_id or 0))
+	local flip_height = 0
 	local highlight_color
 	local hor_constant
 	local num_ascii
@@ -17,17 +18,19 @@ local indicator = function(timer, win_id, bloat, event_act)
 	local height
 	local width
 
-	if #const.cache > 0  and event_act then
+	if #const.cache > 0 and event_act then
 		for _, value in ipairs(const.cache) do
-			if tostring(value) == tostring(curr_win_id) then
+			if tostring(value) == tostring(number) then
+				vim.print(const.cache)
 				const.cache = {}
+				flip_height = 2
 				return 1
 			end
 		end
 	end
-	table.insert(const.cache, curr_win_id)
-        if not event_act then
-		const.cache = {} 
+	table.insert(const.cache, number)
+	if event_act ~= true then
+		const.cache = {}
 	end
 
 	if #number > 1 then
@@ -58,7 +61,7 @@ local indicator = function(timer, win_id, bloat, event_act)
 		content = num_ascii
 		highlight_color = nil
 		hor_constant = 10
-		height = 6
+		height = 6 - flip_height
 		width = 10
 	else
 		content = { " " .. number }
@@ -88,12 +91,7 @@ local indicator = function(timer, win_id, bloat, event_act)
 		if vim.api.nvim_win_is_valid(win_res.win_id) then
 			vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
 		end
-		const.cache = {}
-	end, (timer or const.default_timer))
-
-	vim.defer_fn(function()
-		const.cache = {}
-	end, (const.default_timer + 500))
+	end, (timer or 1500))
 end
 
 local window_highlight = function()
@@ -192,3 +190,4 @@ M.setup = function(config)
 end
 
 return M
+
