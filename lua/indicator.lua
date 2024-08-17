@@ -17,6 +17,17 @@ local indicator = function(timer, win_id, bloat)
 	local height
 	local width
 
+	if #const.cache > 0 then
+		for _, value in ipairs(const.cache) do
+			if tostring(value) == tostring(curr_win_id) then
+				vim.print(curr_win_id, const.cache)
+				const.cache = {}
+				return 1
+			end
+		end
+	end
+	table.insert(const.cache, curr_win_id)
+
 	if #number > 1 then
 		local digits = {}
 		for digit in number:gmatch("%d") do
