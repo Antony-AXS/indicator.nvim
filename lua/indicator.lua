@@ -85,6 +85,7 @@ local indicator = function(timer, win_id, bloat)
 		if vim.api.nvim_win_is_valid(win_res.win_id) then
 			vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
 		end
+		const.cache = {}
 	end, (timer or 1500))
 end
 
