@@ -1,6 +1,6 @@
 local fn = require("utils.fn")
-local ascii = require("ascii.numbers")
 local const = require("constants")
+local ascii = require("ascii.numbers")
 
 local M = {}
 
@@ -91,27 +91,6 @@ local window_highlight = function()
 	end, 300)
 end
 
-M.setup = function(config)
-	if config.indicator_event then
-		if const.autocmd_id == nil then
-			const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
-				desc = "Trigger always when entering a new Buffer",
-				group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
-				callback = function()
-					indicator(500, nil, true)
-				end,
-			})
-			vim.notify("Indicator Event Triggered")
-		else
-			vim.notify("Indicator Event Already Triggered")
-		end
-	end
-
-	if config.window_highlight_event then
-		window_highlight()
-	end
-end
-
 M.indicateCurrent = function(timer, win_id, bloat)
 	indicator(timer, win_id, bloat)
 end
@@ -150,8 +129,12 @@ M.indicator_event_diactivate = function()
 end
 
 M.window_highlight_event_activate = function()
-	const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight })
-	vim.notify("Window HighLight Enabled")
+	if const.win_hilght_acmd_id == nil then
+		const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight })
+		vim.notify("Window HighLight Enabled")
+	else
+		vim.notify("Window HighLight Already Enabled")
+	end
 end
 
 M.window_highlight_event_diactivate = function()
@@ -161,6 +144,27 @@ M.window_highlight_event_diactivate = function()
 		vim.notify("Window HighLight Disabled")
 	else
 		vim.notify("Window HighLight Already Disabled")
+	end
+end
+
+M.setup = function(config)
+	if config.indicator_event then
+		if const.autocmd_id == nil then
+			const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
+				desc = "Trigger always when entering a new Buffer",
+				group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
+				callback = function()
+					indicator(500, nil, true)
+				end,
+			})
+			vim.notify("Indicator Event Triggered")
+		else
+			vim.notify("Indicator Event Already Triggered")
+		end
+	end
+
+	if config.window_highlight_event then
+		M.window_highlight_event_activate()
 	end
 end
 
