@@ -78,6 +78,19 @@ local indicator = function(timer, win_id, bloat)
 	end, (timer or 1500))
 end
 
+local window_highlight = function()
+	local win_id = vim.api.nvim_get_current_win()
+	vim.api.nvim_set_hl(0, "ThisWinHighLight", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
+	vim.api.nvim_set_option_value("winhighlight", "Normal:ThisWinHighLight", { win = win_id })
+
+	vim.defer_fn(function()
+		if vim.api.nvim_win_is_valid(win_id) then
+			vim.api.nvim_set_hl(0, "thisWinHighLight", { bg = nil, fg = nil })
+			vim.api.nvim_set_option_value("winhighlight", "Noarmal:thisWinHighLight", { win = win_id })
+		end
+	end, 300)
+end
+
 M.setup = function(config)
 	if config.indicator_event then
 		if const.autocmd_id == nil then
@@ -93,19 +106,10 @@ M.setup = function(config)
 			vim.notify("Indicator Event Already Triggered")
 		end
 	end
-end
 
-local window_highlight_trigger = function()
-	local win_id = vim.api.nvim_get_current_win()
-	vim.api.nvim_set_hl(0, "ThisWinHighLight", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
-	vim.api.nvim_set_option_value("winhighlight", "Normal:ThisWinHighLight", { win = win_id })
-
-	vim.defer_fn(function()
-		if vim.api.nvim_win_is_valid(win_id) then
-			vim.api.nvim_set_hl(0, "thisWinHighLight", { bg = nil, fg = nil })
-			vim.api.nvim_set_option_value("winhighlight", "Noarmal:thisWinHighLight", { win = win_id })
-		end
-	end, 300)
+	if config.window_highlight_event then
+		window_highlight()
+	end
 end
 
 M.indicateCurrent = function(timer, win_id, bloat)
@@ -146,7 +150,7 @@ M.indicator_event_diactivate = function()
 end
 
 M.window_highlight_event_activate = function()
-	const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight_trigger })
+	const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight })
 	vim.notify("Window HighLight Enabled")
 end
 
