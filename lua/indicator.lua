@@ -101,6 +101,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 M.indicateCurrent = function(timer, win_id, bloat)
 	indicator(timer, win_id, bloat)
 end
+
 M.indicateAll = function(bloat)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
@@ -119,13 +120,13 @@ M.indicator_event_activate = function()
 				indicator(500, nil, true)
 			end,
 		})
-		if const.window_notify then
+		if const.indicator_notify then
 			vim.notify("Indicator Event Triggered")
 		end
 	else
 		vim.notify("Indicator Event Already Triggered")
-		const.window_notify = true
 	end
+	const.window_notify = true
 end
 
 M.indicator_event_diactivate = function()
@@ -136,16 +137,19 @@ M.indicator_event_diactivate = function()
 	else
 		vim.notify("Indicator Event already Disabled")
 	end
-	const.window_notify = true
+	const.indicator_notify = true
 end
 
 M.window_highlight_event_activate = function()
 	if const.win_hilght_acmd_id == nil then
 		const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight })
-		vim.notify("Window HighLight Enabled")
+		if const.window_notify then
+			vim.notify("Window HighLight Enabled")
+		end
 	else
 		vim.notify("Window HighLight Already Enabled")
 	end
+	const.window_notify = true
 end
 
 M.window_highlight_event_diactivate = function()
@@ -156,6 +160,7 @@ M.window_highlight_event_diactivate = function()
 	else
 		vim.notify("Window HighLight Already Disabled")
 	end
+	const.window_notify = true
 end
 
 M.setup = function(config)
