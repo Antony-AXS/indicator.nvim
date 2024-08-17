@@ -86,7 +86,11 @@ local indicator = function(timer, win_id, bloat)
 			vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
 		end
 		const.cache = {}
-	end, (timer or 1500))
+	end, (timer or const.default_timer))
+
+	vim.defer_fn(function()
+		const.cache = {}
+	end, (const.default_timer + 500))
 end
 
 local window_highlight = function()
