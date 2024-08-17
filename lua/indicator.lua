@@ -91,6 +91,13 @@ local window_highlight = function()
 	end, 300)
 end
 
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		const.indicator_notify = false
+		const.window_notify = false
+	end,
+})
+
 M.indicateCurrent = function(timer, win_id, bloat)
 	indicator(timer, win_id, bloat)
 end
@@ -112,9 +119,12 @@ M.indicator_event_activate = function()
 				indicator(500, nil, true)
 			end,
 		})
-		vim.notify("Indicator Event Triggered")
+		if const.window_notify then
+			vim.notify("Indicator Event Triggered")
+		end
 	else
 		vim.notify("Indicator Event Already Triggered")
+		const.window_notify = true
 	end
 end
 
@@ -126,6 +136,7 @@ M.indicator_event_diactivate = function()
 	else
 		vim.notify("Indicator Event already Disabled")
 	end
+	const.window_notify = true
 end
 
 M.window_highlight_event_activate = function()
