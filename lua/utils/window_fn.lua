@@ -1,20 +1,6 @@
 local popup = require("plenary.popup")
 local M = {}
 
-M.taber = function()
-	local tabs = require("harpoon").get_mark_config().marks
-	local returnObj = {}
-	local index = require("harpoon.mark")
-	for k, v in pairs(tabs) do
-		returnObj[k] = {
-			function()
-				return v["filename"]
-			end,
-		}
-	end
-	return returnObj
-end
-
 M.create_float_window = function(content)
 	-- Create a new buffer
 	local buf = vim.api.nvim_create_buf(false, true) -- {listed: false, scratch: true}
