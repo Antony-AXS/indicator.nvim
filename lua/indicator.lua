@@ -1,8 +1,10 @@
 local fn = require("utils.fn")
 local const = require("constants")
-local ascii = require("ascii.numbers")
+local ascii = require("ascii.digits")
 
 local M = {}
+
+local cache = {}
 
 local indicator = function(timer, win_id, bloat)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
@@ -16,6 +18,14 @@ local indicator = function(timer, win_id, bloat)
 	local content
 	local height
 	local width
+
+	if #cache > 0 then
+		for _, value in ipairs(cache) do
+			if value == curr_win_id then
+				return 1
+			end
+		end
+	end
 
 	if #number > 1 then
 		local digits = {}
@@ -70,6 +80,10 @@ local indicator = function(timer, win_id, bloat)
 			width = width,
 		},
 	})
+
+	vim.defer_fn(function()
+		cache = {}
+	end, 50)
 
 	vim.defer_fn(function()
 		if vim.api.nvim_win_is_valid(win_res.win_id) then
