@@ -4,6 +4,23 @@ local const = require("constants")
 
 local M = {}
 
+M.setup = function(config)
+	if config.indicator_event then
+		if const.autocmd_id == nil then
+			const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
+				desc = "Trigger always when entering a new Buffer",
+				group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
+				callback = function()
+					M.indicator(500, nil, true)
+				end,
+			})
+			vim.notify("Indicator Event Triggered")
+		else
+			vim.notify("Indicator Event Already Triggered")
+		end
+	end
+end
+
 M.indicator = function(timer, win_id, bloat)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
@@ -149,4 +166,3 @@ vim.keymap.set("n", "<leader>iw", function()
 end, {})
 
 return M
-
