@@ -21,7 +21,7 @@ M.setup = function(config)
 	end
 end
 
-M.indicator = function(timer, win_id, bloat)
+local indicator = function(timer, win_id, bloat)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
 	local _width = vim.api.nvim_win_get_width(curr_win_id)
@@ -95,49 +95,7 @@ M.indicator = function(timer, win_id, bloat)
 	end, (timer or 1500))
 end
 
-M.indicateAll = function(bloat)
-	local current_tabpage = vim.api.nvim_get_current_tabpage()
-	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
-
-	for _, win_id in ipairs(window_ids) do
-		M.indicator(1500, win_id, bloat)
-	end
-end
-
-vim.keymap.set("n", "<leader>bx", function()
-	M.indicator(nil, nil, true)
-end, { silent = true })
-vim.keymap.set("n", "<leader>bv", function()
-	M.indicateAll(true)
-end, { silent = true })
-vim.keymap.set("n", "<leader>bc", function()
-	M.indicateAll(false)
-end, { silent = true })
-vim.keymap.set("n", "<leader>by", function()
-	if const.autocmd_id == nil then
-		const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
-			desc = "Trigger always when entering a new Buffer",
-			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
-			callback = function()
-				M.indicator(500, nil, true)
-			end,
-		})
-		vim.notify("Indicator Event Triggered")
-	else
-		vim.notify("Indicator Event Already Triggered")
-	end
-end, { silent = true })
-vim.keymap.set("n", "<leader>bz", function()
-	if autocmd_id then
-		vim.api.nvim_del_autocmd(autocmd_id)
-		autocmd_id = nil
-		vim.notify("Indicator Event Disabled")
-	else
-		vim.notify("Indicator Event already Disabled")
-	end
-end, { silent = true })
-
-local function window_highlight()
+local window_highlight_trigger = function()
 	local win_id = vim.api.nvim_get_current_win()
 	vim.api.nvim_set_hl(0, "ThisWinHighLight", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
 	vim.api.nvim_set_option_value("winhighlight", "Normal:ThisWinHighLight", { win = win_id })
@@ -150,19 +108,56 @@ local function window_highlight()
 	end, 300)
 end
 
-vim.keymap.set("n", "<leader>iq", function()
-	win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight })
-	vim.notify("Window HighLight Enabled")
-end, {})
+M.indicateCurrent = function(timer, win_id, bloat)
+	indicator(timer, win_id, bloat)
+end
+M.indicateAll = function(bloat)
+	local current_tabpage = vim.api.nvim_get_current_tabpage()
+	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
-vim.keymap.set("n", "<leader>iw", function()
-	if win_hilght_acmd_id ~= nil then
-		vim.api.nvim_del_autocmd(win_hilght_acmd_id)
+	for _, win_id in ipairs(window_ids) do
+		M.indicator(1500, win_id, bloat)
+	end
+end
+
+M.indicator_event_activate = function()
+	if const.autocmd_id == nil then
+		const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
+			desc = "Trigger always when entering a new Buffer",
+			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
+			callback = function()
+				M.indicator(500, nil, true)
+			end,
+		})
+		vim.notify("Indicator Event Triggered")
+	else
+		vim.notify("Indicator Event Already Triggered")
+	end
+end
+
+M.indicator_event_diactivate = function()
+	if const.autocmd_id then
+		vim.api.nvim_del_autocmd(const.autocmd_id)
+		const.autocmd_id = nil
+		vim.notify("Indicator Event Disabled")
+	else
+		vim.notify("Indicator Event already Disabled")
+	end
+end
+
+M.window_highlight_event_activate = function()
+	const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight_trigger })
+	vim.notify("Window HighLight Enabled")
+end
+
+M.window_highlight_event_diactivate = function()
+	if const.win_hilght_acmd_id ~= nil then
+		vim.api.nvim_del_autocmd(const.win_hilght_acmd_id)
 		const.win_hilght_acmd_id = nil
 		vim.notify("Window HighLight Disabled")
 	else
 		vim.notify("Window HighLight Already Disabled")
 	end
-end, {})
+end
 
 return M
