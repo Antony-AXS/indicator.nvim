@@ -149,18 +149,7 @@ end
 
 M.setup = function(config)
 	if config.indicator_event then
-		if const.autocmd_id == nil then
-			const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
-				desc = "Trigger always when entering a new Buffer",
-				group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
-				callback = function()
-					indicator(500, nil, true)
-				end,
-			})
-			vim.notify("Indicator Event Triggered")
-		else
-			vim.notify("Indicator Event Already Triggered")
-		end
+		M.indicator_event_activate()
 	end
 
 	if config.window_highlight_event then
