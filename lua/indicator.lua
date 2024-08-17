@@ -126,7 +126,7 @@ M.indicator_event_activate = function()
 	else
 		vim.notify("Indicator Event Already Triggered")
 	end
-	const.window_notify = true
+	const.indicator_notify = true
 end
 
 M.indicator_event_diactivate = function()
