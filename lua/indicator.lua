@@ -4,7 +4,7 @@ local ascii = require("ascii.digits")
 
 local M = {}
 
-local indicator = function(timer, win_id, bloat)
+local indicator = function(timer, win_id, bloat, event_act)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
 	local _width = vim.api.nvim_win_get_width(curr_win_id)
@@ -17,7 +17,7 @@ local indicator = function(timer, win_id, bloat)
 	local height
 	local width
 
-	if #const.cache > 0 then
+	if #const.cache > 0  and event_act then
 		for _, value in ipairs(const.cache) do
 			if tostring(value) == tostring(curr_win_id) then
 				const.cache = {}
@@ -26,6 +26,9 @@ local indicator = function(timer, win_id, bloat)
 		end
 	end
 	table.insert(const.cache, curr_win_id)
+        if not event_act then
+		const.cache = {} 
+	end
 
 	if #number > 1 then
 		local digits = {}
@@ -132,7 +135,7 @@ M.indicator_event_activate = function()
 			desc = "Trigger always when entering a new Buffer",
 			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
 			callback = function()
-				indicator(500, nil, true)
+				indicator(500, nil, true, true)
 			end,
 		})
 		if const.indicator_notify then
