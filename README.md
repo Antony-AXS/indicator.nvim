@@ -3,6 +3,8 @@ indicator.nvim is a light-weight plugin for inidicating the window numbers on th
 so that one can use it to navigate throught windows in a tab easily.
 there is so a window highlight feature that works while jumping through windows in a tab
 
+### Demo Video
+/home/new_me/Videos/Screencasts/Screencast from 19-08-24 12:59:47 AM IST.webm
 ### Required
 
 -   `neovim >= 0.10`
