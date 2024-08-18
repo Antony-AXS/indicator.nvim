@@ -18,16 +18,20 @@ local indicator = function(timer, win_id, bloat, event_act)
 	local height
 	local width
 
+	if #const.cache == 2 then
+		table.remove(const.cache, 1)
+	end
+
 	if #const.cache > 0 and event_act then
 		for _, value in ipairs(const.cache) do
 			if tostring(value) == tostring(number) then
-				vim.print(const.cache)
 				const.cache = {}
 				flip_height = 2
 				return 1
 			end
 		end
 	end
+
 	table.insert(const.cache, number)
 	if event_act ~= true then
 		const.cache = {}
@@ -190,4 +194,3 @@ M.setup = function(config)
 end
 
 return M
-
