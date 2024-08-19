@@ -26,6 +26,22 @@ It also includes a window highlight feature that activates while jumping between
 			window_highlight_event = true,
 		})
 
+	end,
+}
+```
+### Indicator Functions
+
+| Functions                                     | Description                                                                           |
+|-----------------------------------------------|---------------------------------------------------------------------------------------|
+| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into  |
+| `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
+| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
+| `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime                    |              
+
+### KeyMaps
+
+```lua
+
 		vim.keymap.set("n", "<leader>bx", function()
 			Indicator.indicateCurrent(nil, nil, true)
 		end, { silent = true })
@@ -41,15 +57,4 @@ It also includes a window highlight feature that activates while jumping between
 
 		vim.keymap.set("n", "<leader>iq", Indicator.window_highlight_event_activate, {})
 		vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_diactivate, {})
-	end,
-}
 ```
-### Indicator Functions
-
-| Functions                                     | Description                                                                           |
-|-----------------------------------------------|---------------------------------------------------------------------------------------|
-| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into  |
-| `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
-| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
-| `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime                    |              
-
