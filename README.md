@@ -44,9 +44,11 @@ It also includes a window highlight feature that activates while jumping between
   vim.keymap.set("n", "<leader>bx", function()
   	Indicator.indicateCurrent(nil, nil, true)
   end, { silent = true })
+
   vim.keymap.set("n", "<leader>bv", function()
   	Indicator.indicateAll(true)
   end, { silent = true })
+
   vim.keymap.set("n", "<leader>bc", function()
   	Indicator.indicateAll(false)
   end, { silent = true })
