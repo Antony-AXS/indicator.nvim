@@ -13,6 +13,7 @@ It also includes a window highlight feature that activates while jumping between
 * make sure a nerdfont is added in your terminal emulator, if not download from : https://www.nerdfonts.com/
 * install using your favorite plugin manager (lazy.nvim in this example)
 * keymap examples are also provided, Feel free to change the keymaps to suit your own comfort.
+
 ```lua
 {
    "Antony-AXS/indicator.nvim",
@@ -25,7 +26,7 @@ It also includes a window highlight feature that activates while jumping between
    		indicator_event = true,
    		window_highlight_event = true,
    	})
-   end,
+   end
 }
 ```
 ### Indicator Functions
@@ -36,6 +37,7 @@ It also includes a window highlight feature that activates while jumping between
 | `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
 | `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
 | `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime                    |              
+| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located   |              
 
 ### KeyMaps for Indicator Functions
 
