@@ -1,10 +1,8 @@
 # indicator.nvim
-indicator.nvim is a light-weight plugin for inidicating the window numbers on the screen,
-so that one can use it to navigate throught windows in a tab easily.
-there is so a window highlight feature that works while jumping through windows in a tab
+indicator.nvim is a lightweight plugin for indicating window numbers on the screen, 
+allowing easy navigation through windows in a tab. 
+It also includes a window highlight feature that activates while jumping between windows in a tab
 
-### Demo Video
-/home/new_me/Videos/Screencasts/Screencast from 19-08-24 12:59:47 AM IST.webm
 ### Required
 
 -   `neovim >= 0.10`
@@ -12,6 +10,7 @@ there is so a window highlight feature that works while jumping through windows 
 
 ## ⇁ Installation
 * neovim 0.10 + required
+* make sure a nerdfont is added in your terminal emulator, if not download from : https://www.nerdfonts.com/
 * install using your favorite plugin manager (lazy.nvim in this example)
 * keymap examples are also added in config, Feel free to change the keymaps to suit your own comfort.
 ```lua
@@ -45,4 +44,12 @@ there is so a window highlight feature that works while jumping through windows 
 	end,
 }
 ```
+### Indicator Functions
+
+| Functions                                     | Description                                                                                                                                                              |
+|-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcator the window number of the window you jump into                                                                                    |
+| `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcator the window number of the window you jump into                                                                                   |
+| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                                                                                                         |
+| `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime
 
