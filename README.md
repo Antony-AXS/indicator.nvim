@@ -25,8 +25,8 @@ It also includes a window highlight feature that activates while jumping between
      local Indicator = require("indicator")
      
      Indicator.setup({
-       inindicator_event = true,
-       wiwindow_highlight_event = true,
+       indicator_event = true,
+       window_highlight_event = true,
      })
    end
 }
