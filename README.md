@@ -48,8 +48,8 @@ It also includes a window highlight feature that activates while jumping between
 
 | Functions                                     | Description                                                                                                                                                              |
 |-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcator the window number of the window you jump into                                                                                    |
-| `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcator the window number of the window you jump into                                                                                   |
+| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into                                                                                    |
+| `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcate the window number of the window you jump into                                                                                   |
 | `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                                                                                                         |
 | `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime
 
