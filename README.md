@@ -22,13 +22,13 @@ It also includes a window highlight feature that activates while jumping between
    event = "VeryLazy",
    dependencies = { "nvim-lua/plenary.nvim" },
    config = function()
-   	local Indicator = require("indicator")
-
-   	Indicator.setup({
-   		indicator_event = true,
-   		window_highlight_event = true,
-   	})
-   end
+     local Indicator = require("indicator")
+     
+     Indicator.setup({
+       inindicator_event = true,
+       wiwindow_highlight_event = true,
+     })
+end
 }
 ```
 ### Indicator Functions
