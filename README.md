@@ -36,9 +36,9 @@ It also includes a window highlight feature that activates while jumping between
 | Functions                                     | Description                                                                           |
 |-----------------------------------------------|---------------------------------------------------------------------------------------|
 | `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into  |
-| `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
+| `Indicator.indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
 | `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
-| `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime                    |
+| `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime                    |
 | `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located   |
 | `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number        |
 
@@ -58,8 +58,8 @@ It also includes a window highlight feature that activates while jumping between
   end, { silent = true })
   
   vim.keymap.set("n", "<leader>it", Indicator.indicator_event_activate, {})
-  vim.keymap.set("n", "<leader>ir", Indicator.indicator_event_diactivate, {})
+  vim.keymap.set("n", "<leader>ir", Indicator.indicator_event_deactivate, {})
   
   vim.keymap.set("n", "<leader>iq", Indicator.window_highlight_event_activate, {})
-  vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_diactivate, {})
+  vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_deactivate, {})
 ```
