@@ -12,21 +12,21 @@ It also includes a window highlight feature that activates while jumping between
 * neovim 0.10 + required
 * make sure a nerdfont is added in your terminal emulator, if not download from : https://www.nerdfonts.com/
 * install using your favorite plugin manager (lazy.nvim in this example)
-* keymap examples are also added in config, Feel free to change the keymaps to suit your own comfort.
+* keymap examples are also provided, Feel free to change the keymaps to suit your own comfort.
 ```lua
 {
-	"Antony-AXS/indicator.nvim",
-	event = "VeryLazy",
-	dependencies = { "nvim-lua/plenary.nvim" },
-	config = function()
-		local Indicator = require("indicator")
+  "Antony-AXS/indicator.nvim",
+  event = "VeryLazy",
+  dependencies = { "nvim-lua/plenary.nvim" },
+  config = function()
+  	local Indicator = require("indicator")
 
-		Indicator.setup({
-			indicator_event = true,
-			window_highlight_event = true,
-		})
-
-	end,
+  	Indicator.setup({
+  		indicator_event = true,
+  		window_highlight_event = true,
+  	})
+  
+  end,
 }
 ```
 ### Indicator Functions
@@ -38,7 +38,7 @@ It also includes a window highlight feature that activates while jumping between
 | `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
 | `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime                    |              
 
-### KeyMaps
+### KeyMaps for Indicator Functions
 
 ```lua
   vim.keymap.set("n", "<leader>bx", function()
