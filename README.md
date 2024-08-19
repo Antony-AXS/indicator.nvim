@@ -15,18 +15,17 @@ It also includes a window highlight feature that activates while jumping between
 * keymap examples are also provided, Feel free to change the keymaps to suit your own comfort.
 ```lua
 {
-  "Antony-AXS/indicator.nvim",
-  event = "VeryLazy",
-  dependencies = { "nvim-lua/plenary.nvim" },
-  config = function()
-  	local Indicator = require("indicator")
+   "Antony-AXS/indicator.nvim",
+   event = "VeryLazy",
+   dependencies = { "nvim-lua/plenary.nvim" },
+   config = function()
+   	local Indicator = require("indicator")
 
-  	Indicator.setup({
-  		indicator_event = true,
-  		window_highlight_event = true,
-  	})
-  
-  end,
+   	Indicator.setup({
+   		indicator_event = true,
+   		window_highlight_event = true,
+   	})
+   end,
 }
 ```
 ### Indicator Functions
