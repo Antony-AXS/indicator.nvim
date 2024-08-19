@@ -1,4 +1,6 @@
 # indicator.nvim
+
+## What is Indicator.nvim ?
 indicator.nvim is a lightweight plugin for indicating window numbers on the screen, 
 allowing easy navigation through windows in a tab. 
 It also includes a window highlight feature that activates while jumping between windows in a tab
@@ -36,8 +38,9 @@ It also includes a window highlight feature that activates while jumping between
 | `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into  |
 | `Indicator.indicator_event_diactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
 | `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
-| `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime                    |              
-| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located   |              
+| `Indicator.window_highlight_event_diactivate` | Disables the event to Highlight the window you jump into everytime                    |
+| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located   |
+| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number        |
 
 ### KeyMaps for Indicator Functions
 
