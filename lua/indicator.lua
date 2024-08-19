@@ -149,7 +149,7 @@ M.indicator_event_activate = function()
 	const.indicator_notify = true
 end
 
-M.indicator_event_diactivate = function()
+M.indicator_event_deactivate = function()
 	if const.autocmd_id then
 		vim.api.nvim_del_autocmd(const.autocmd_id)
 		const.autocmd_id = nil
@@ -172,7 +172,7 @@ M.window_highlight_event_activate = function()
 	const.window_notify = true
 end
 
-M.window_highlight_event_diactivate = function()
+M.window_highlight_event_deactivate = function()
 	if const.win_hilght_acmd_id ~= nil then
 		vim.api.nvim_del_autocmd(const.win_hilght_acmd_id)
 		const.win_hilght_acmd_id = nil
