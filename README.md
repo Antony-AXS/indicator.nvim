@@ -5,8 +5,9 @@ indicator.nvim is a lightweight plugin for indicating window numbers on the scre
 allowing easy navigation through windows in a tab. 
 It also includes a window highlight feature that activates while jumping between windows in a tab.
 
-###Preview
-(https://github.com/user-attachments/assets/3575dba9-0b5d-40c7-bd6f-15575d8c2949)
+### Preview
+
+[Screencast from 21-08-24 07:53:33 PM IST.webm](https://github.com/user-attachments/assets/3575dba9-0b5d-40c7-bd6f-15575d8c2949)
 
 ### Required
 
