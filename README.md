@@ -39,12 +39,13 @@ It also includes a window highlight feature that activates while jumping between
 
 | Functions                                     | Description                                                                           |
 |-----------------------------------------------|---------------------------------------------------------------------------------------|
+| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number        |
+| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located   |
 | `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into  |
 | `Indicator.indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
 | `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
 | `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime                    |
-| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located   |
-| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number        |
+
 
 ### KeyMaps for Indicator Functions
 
@@ -64,7 +65,8 @@ It also includes a window highlight feature that activates while jumping between
 
 ## About Window Highlight Feature
 * Setting 'window_highlight_event = true' in setup function sets the hightlight feature ON by default.
-* You can use 'Indicator.window_highlight_event_deactivate' to turn it off.
+* You can use 'Indicator.window_highlight_event_deactivate' to turn it OFF.
+* You can use 'Indicator.window_highlight_event_activate' to turn it ON.
 
 ### Preview
 ![wind](https://github.com/user-attachments/assets/f6a1a127-69a9-486e-8e2e-4e8f412c8c7a)
@@ -77,10 +79,13 @@ It also includes a window highlight feature that activates while jumping between
    Indicator.setup({
     window_highlight_event = true, -- turns ON the window highlight feature by default
    })
-  
+ end
+```
+
+### Keymaps
+```lua
  vim.keymap.set("n", "<leader>iq", Indicator.window_highlight_event_activate, {})
  vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_deactivate, {})
- end
 ```
 
 ## Welcome Your Ideas
