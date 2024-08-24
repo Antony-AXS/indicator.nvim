@@ -7,7 +7,7 @@ It also includes a window highlight feature that activates while jumping between
 
 ### Preview
 
-[Screencast from 21-08-24 07:53:33 PM IST.webm](https://github.com/user-attachments/assets/3575dba9-0b5d-40c7-bd6f-15575d8c2949)
+[Screencast from 21-08-24 08:50:17 PM IST.webm](https://github.com/user-attachments/assets/072ebf80-9028-4d80-93c7-03c0a566ac38)
 
 ### Required
 
@@ -29,8 +29,8 @@ It also includes a window highlight feature that activates while jumping between
      local Indicator = require("indicator")
      
      Indicator.setup({
-       indicator_event = true,
-       window_highlight_event = true,
+       indicator_event = true, -- turns ON the Indicator feature by default
+       window_highlight_event = false,
      })
    end
 }
@@ -56,14 +56,32 @@ It also includes a window highlight feature that activates while jumping between
   vim.keymap.set("n", "<leader>bv", function()
   	Indicator.indicateAll(true)
   end, { silent = true })
-
-  vim.keymap.set("n", "<leader>bc", function()
-  	Indicator.indicateAll(false)
-  end, { silent = true })
   
   vim.keymap.set("n", "<leader>it", Indicator.indicator_event_activate, {})
   vim.keymap.set("n", "<leader>ir", Indicator.indicator_event_deactivate, {})
-  
-  vim.keymap.set("n", "<leader>iq", Indicator.window_highlight_event_activate, {})
-  vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_deactivate, {})
 ```
+
+
+## About Window Highlight Feature
+* Setting 'window_highlight_event = true' in setup function sets the hightlight feature ON by default.
+* You can use 'Indicator.window_highlight_event_deactivate' to turn it off.
+
+### Preview
+![wind](https://github.com/user-attachments/assets/f6a1a127-69a9-486e-8e2e-4e8f412c8c7a)
+
+
+### Setup
+```lua
+ config = function()
+   local Indicator = require("indicator")
+   Indicator.setup({
+    window_highlight_event = true, -- turns ON the window highlight feature by default
+   })
+  
+ vim.keymap.set("n", "<leader>iq", Indicator.window_highlight_event_activate, {})
+ vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_deactivate, {})
+ end
+```
+
+## Welcome Your Ideas
+If you have any ideas or suggestions to improve this plugin, I’d love to hear from you! Your feedback is always welcome.
