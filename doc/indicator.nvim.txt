@@ -2,7 +2,7 @@ Author: Antony Xavier <antonyaxs324@gmail.com>
 Homepage: <https://github.com/Antony-AXS/indicator.nvim>
 License: MIT license
 
-indicator.nvim.txt                                                         MyPlugin Documentation
+indicator.nvim.txt                           Plugin Documentation                 *indicator.nvim*
 
 =========================================================================================================
 
@@ -13,23 +13,24 @@ allowing easy navigation through windows in a tab.
 It also includes a window highlight feature that activates while jumping between windows in a tab.
 
 =========================================================================================================
-CONTENTS                                                                          indicator_contents
 
-Table of Contents:                                |indicator.nvim-table-of-contents|
-1. Commands ............................................. |indicator.nvim-commands|
-2. Functions ............................................. |indicator.nvim-commands|
-3. Configuration ........................................ |indicator.nvim-configuration|
+CONTENTS                                                                          *indicator_contents*
+
+Table of Contents:                                                  |indicator.nvim-table-of-contents|
+1. Commands ......................................................  |indicator.nvim-commands|
+2. Functions .....................................................  |indicator.nvim-commands|
+3. Configuration .................................................  |indicator.nvim-configuration|
 
 =========================================================================================================
 
-1. COMMANDS                                                                       indicator_commands
+1. COMMANDS                                                                       *indicator_commands*
 
 :MyPluginCommand
     This is a sample command provided by MyPlugin.
 
 =========================================================================================================
 
-2. FUNCTIONS                                                                      indicator_functions
+2. FUNCTIONS                                                                      *indicator_functions*
 
   Indicator.IndicateCurrent(timer)
 
@@ -57,7 +58,7 @@ Table of Contents:                                |indicator.nvim-table-of-conte
 
 ========================================================================================================
 
-3. CONFIGURATION                                                         indicator_configuration
+3. CONFIGURATION                                                         *indicator_configuration*
 
   In lazy.nvim :
                 {
