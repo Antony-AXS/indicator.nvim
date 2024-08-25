@@ -61,6 +61,7 @@ Table of Contents:                                                  |indicator.n
 3. CONFIGURATION                                                         *indicator_configuration*
 
   In lazy.nvim :
+>lua
                 {
                   "Antony-AXS/indicator.nvim",
                   event = "VeryLazy",
@@ -74,6 +75,6 @@ Table of Contents:                                                  |indicator.n
                     })
                   end
                 }
-
+<
 -------------------------------------------------------------------------------------------------------
-
+vim:tw=80:ts=2:ft=help:norl:syntax=help:
