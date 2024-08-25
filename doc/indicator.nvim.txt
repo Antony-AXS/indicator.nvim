@@ -1,0 +1,78 @@
+Author: Antony Xavier <antonyaxs324@gmail.com>
+Homepage: <https://github.com/Antony-AXS/indicator.nvim>
+License: MIT license
+
+indicator.nvim.txt                                                         MyPlugin Documentation
+
+=========================================================================================================
+
+INTRODUCTION                                                                      indicator.nvim
+
+indicator.nvim is a lightweight plugin for indicating window numbers on the screen, 
+allowing easy navigation through windows in a tab. 
+It also includes a window highlight feature that activates while jumping between windows in a tab.
+
+=========================================================================================================
+CONTENTS                                                                          indicator_contents
+
+Table of Contents:                                |indicator.nvim-table-of-contents|
+1. Commands ............................................. |indicator.nvim-commands|
+2. Functions ............................................. |indicator.nvim-commands|
+3. Configuration ........................................ |indicator.nvim-configuration|
+
+=========================================================================================================
+
+1. COMMANDS                                                                       indicator_commands
+
+:MyPluginCommand
+    This is a sample command provided by MyPlugin.
+
+=========================================================================================================
+
+2. FUNCTIONS                                                                      indicator_functions
+
+  Indicator.IndicateCurrent(timer)
+
+       - this function is to Indicate the Current window the cursor is in.
+       - it is done by displaying the window number on the screen.
+       - this function takes in one argument called timer (seconds) which is to extend the display time
+       - the timer argument should be a postive integer passed as a num datatype in seconds
+       - timer not a mandatory field, if its not passed the default display time is 1500 seconds
+
+    Parameters:
+       . timer (integer|nil) : to set the indicator number window lifetime in seconds
+
+  ------------------------------------------------------------------------------------------------------
+
+  Indicator.indicateAll(timer)
+
+      - this function is to Indicate the Current window the cursor is in.
+      - it is done by displaying the window number on the screen.
+      - this function takes in one argument called timer (seconds) which is to extend the display time
+      - the timer argument should be a postive integer passed as a num datatype in seconds
+      - timer not a mandatory field, if its not passed the default display time is 1500 seconds
+
+    Parameters:
+       . timer (integer|nil) : to set the indicator number window lifetime in seconds
+
+========================================================================================================
+
+3. CONFIGURATION                                                         indicator_configuration
+
+  In lazy.nvim :
+                {
+                  "Antony-AXS/indicator.nvim",
+                  event = "VeryLazy",
+                  dependencies = { "nvim-lua/plenary.nvim" },
+                  config = function()
+                    local Indicator = require("indicator")
+                    
+                    Indicator.setup({
+                      indicator_event = true, -- turns ON the Indicator feature by default
+                      window_highlight_event = false,
+                    })
+                  end
+                }
+
+-------------------------------------------------------------------------------------------------------
+
