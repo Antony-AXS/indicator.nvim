@@ -4,7 +4,7 @@ local ascii = require("ascii.digits")
 
 local M = {}
 
-local indicator = function(timer, win_id, bloat, event_act)
+local indicator = function(timer, win_id, bloat)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
 	local _width = vim.api.nvim_win_get_width(curr_win_id)
@@ -88,7 +88,7 @@ local indicator = function(timer, win_id, bloat, event_act)
 		if vim.api.nvim_win_is_valid(win_res.win_id) then
 			vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
 		end
-	end, (timer or 1500))
+	end, (timer or const.indicator_timer))
 end
 
 local window_highlight = function()
@@ -101,19 +101,19 @@ local window_highlight = function()
 			vim.api.nvim_set_hl(0, "thisWinHighLight", { bg = nil, fg = nil })
 			vim.api.nvim_set_option_value("winhighlight", "Noarmal:thisWinHighLight", { win = win_id })
 		end
-	end, 300)
+	end, const.window_timer)
 end
 
-M.indicateCurrent = function(timer, win_id, bloat)
-	indicator(timer, win_id, bloat)
+M.indicateCurrent = function(timer)
+	indicator(timer, nil, true)
 end
 
-M.indicateAll = function(bloat)
+M.indicateAll = function(timer)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
 	for _, win_id in ipairs(window_ids) do
-		indicator(1500, win_id, bloat)
+		indicator(timer, win_id, true)
 	end
 end
 
@@ -123,7 +123,7 @@ M.indicator_event_activate = function()
 			desc = "Trigger always when entering a new Buffer",
 			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
 			callback = function()
-				indicator(500, nil, true, true)
+				indicator(500, nil, true)
 			end,
 		})
 		if const.indicator_notify then

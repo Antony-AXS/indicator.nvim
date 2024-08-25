@@ -4,5 +4,6 @@ return {
 	win_hilght_acmd_id = nil,
 	indicator_notify = false,
 	window_notify = false,
-	default_timer = 1500,
+	window_timer = 300,
+	indicator_timer = 1500,
 }
