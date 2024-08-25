@@ -104,13 +104,6 @@ local window_highlight = function()
 	end, 300)
 end
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		const.indicator_notify = false
-		const.window_notify = false
-	end,
-})
-
 M.indicateCurrent = function(timer, win_id, bloat)
 	indicator(timer, win_id, bloat)
 end
