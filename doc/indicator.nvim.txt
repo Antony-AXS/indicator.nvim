@@ -1,9 +1,8 @@
 Author: Antony Xavier <antonyaxs324@gmail.com>
 Homepage: <https://github.com/Antony-AXS/indicator.nvim>
 License: MIT license
-
-indicator.nvim.txt                      Plugin Documentation                      *indicator.nvim*
-
+                                                                                  *indicator.nvim*
+indicator.nvim.txt                      Plugin Documentation                      
 =========================================================================================================
 
 |INTRODUCTION|                                                                      indicator.nvim
@@ -45,27 +44,27 @@ Table of Contents:                                                  |indicator.n
 
   indicateCurrent({timer})
 
-     - this function is to Indicate the Current window the cursor is in.
-     - it's done by displaying the window number on the screen.
-     - this function takes in one argument called timer (seconds) which is to extend the display time.
-     - the timer argument should be a postive integer passed as a num datatype in seconds.
-     - timer not a mandatory field, if its not passed the default display time is 1500 seconds.
+     - This function indicates the window where the cursor is currently located.
+     - It's done by displaying the window number at the top right corner of each window.
+     - the function takes in an argument called timer to extend or shorten the display time.
+     - timer argument should be a positive integer, representing the duration in seconds.
+     - timer field is optional if not provided, the display time defaults to |1500| seconds.
 
     Parameters:
-       . {timer} (integer|nil) : to set the indicator number window lifetime in seconds
+       . {timer} (integer|nil) : to set the indicator window lifetime in |seconds|
 
   ------------------------------------------------------------------------------------------------------
 
   indicateAll({timer})
 
-     - this function is to Indicate all the opened windows in the displayed tab.
-     - it's done by displaying the window number at the top right corner of each window.
-     - this function takes in one argument called timer (seconds) which is to extend the display time.
-     - the timer argument should be a postive integer passed as a num datatype in seconds.
-     - timer not a mandatory field, if its not passed the default display time is 1500 seconds.
+     - This function indicates all the open windows in the current working tab.
+     - It's done by displaying the window number at the top right corner of each window.
+     - the function takes in an argument called timer to extend or shorten the display time.
+     - timer argument should be a positive integer, representing the duration in seconds.
+     - timer field is optional if not provided, the display time defaults to |1500| seconds.
 
     Parameters:
-       . {timer} (integer|nil) : to set the indicator number window lifetime in seconds
+       . {timer} (integer|nil) : to set the indicator window lifetime in |seconds|
 
 =========================================================================================================
 
