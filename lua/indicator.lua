@@ -12,11 +12,19 @@ local indicator = function(timer, win_id, bloat)
 	local number = tostring(vim.api.nvim_win_get_number(win_id or 0))
 	local num = tostring(number)
 	local highlight_color
+	local curr_win_config
 	local hor_constant
 	local num_ascii
 	local content
 	local height
 	local width
+
+	if vim.api.nvim_win_is_valid(curr_win_id) then
+		curr_win_config = vim.api.nvim_win_get_config(curr_win_id)
+		if not curr_win_config.focusable then
+			return 1
+		end
+	end
 
 	if const.cache[num] == nil then
 		const.cache[num] = {}
