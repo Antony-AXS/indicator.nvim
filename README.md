@@ -51,11 +51,11 @@ It also includes a window highlight feature that activates while jumping between
 
 ```lua
   vim.keymap.set("n", "<leader>bx", function()
-  	Indicator.indicateCurrent(nil, nil, true)
+  	Indicator.indicateCurrent() -- takes in an integer arugment to extend the indicator display time
   end, { silent = true })
 
   vim.keymap.set("n", "<leader>bv", function()
-  	Indicator.indicateAll(true)
+  	Indicator.indicateAll()
   end, { silent = true })
   
   vim.keymap.set("n", "<leader>it", Indicator.indicator_event_activate, {})
