@@ -169,6 +169,26 @@ M.window_highlight_event_deactivate = function()
 	const.window_notify = true
 end
 
+vim.api.nvim_create_user_command("Indicator", function(opts)
+	if opts.args == "ON" then
+		M.indicator_event_activate()
+	elseif opts.args == "OFF" then
+		M.indicator_event_deactivate()
+	else
+		vim.notify("Please pass the right Indicator Argument, {ON | OFF}")
+	end
+end, { nargs = "?" })
+
+vim.api.nvim_create_user_command("IndicatorWinHl", function(opts)
+	if opts.args == "ON" then
+		M.indicator_event_activate()
+	elseif opts.args == "OFF" then
+		M.indicator_event_deactivate()
+	else
+		vim.notify("Please pass the right Window Highlight Argument, {ON | OFF}")
+	end
+end, { nargs = "?" })
+
 M.setup = function(config)
 	if config.indicator_event then
 		M.indicator_event_activate()
