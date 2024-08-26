@@ -45,11 +45,11 @@ Table of Contents:                                                  |indicator.n
 
   indicateCurrent({timer})
 
-      - this function is to Indicate the Current window the cursor is in.
-      - it's done by displaying the window number on the screen.
-      - this function takes in one argument called timer (seconds) which is to extend the display time.
-      - the timer argument should be a postive integer passed as a num datatype in seconds.
-      - timer not a mandatory field, if its not passed the default display time is 1500 seconds.
+     - this function is to Indicate the Current window the cursor is in.
+     - it's done by displaying the window number on the screen.
+     - this function takes in one argument called timer (seconds) which is to extend the display time.
+     - the timer argument should be a postive integer passed as a num datatype in seconds.
+     - timer not a mandatory field, if its not passed the default display time is 1500 seconds.
 
     Parameters:
        . {timer} (integer|nil) : to set the indicator number window lifetime in seconds
