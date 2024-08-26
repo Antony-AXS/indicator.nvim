@@ -88,5 +88,14 @@ It also includes a window highlight feature that activates while jumping between
  vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_deactivate, {})
 ```
 
+### Help Doc
+Enter the following commands to jump each specific section of the document
+| Doc Commands                   | Description                                 |
+|--------------------------------|---------------------------------------------|
+|`:help indicator.nvim`          | to jump to starting page of the doc         | 
+|`:help indicator_commands`      | to jump to commands section of the doc      |
+|`:help indicator_functions`     | to jump to functions section of the doc     |
+|`:help indicator_configuration` | to jump to configuration section of the doc |
+
 ## Welcome Your Ideas
 If you have any ideas or suggestions to improve this plugin, I’d love to hear from you! Your feedback is always welcome.
