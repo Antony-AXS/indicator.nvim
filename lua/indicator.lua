@@ -6,24 +6,26 @@ local M = {}
 
 local indicator = function(timer, win_id, bloat)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
-	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
-	local _width = vim.api.nvim_win_get_width(curr_win_id)
 
+	if not vim.api.nvim_win_is_valid(curr_win_id) then
+		return 1
+	end
+
+	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
 	local number = tostring(vim.api.nvim_win_get_number(win_id or 0))
+	local curr_win_config = vim.api.nvim_win_get_config(curr_win_id)
+	local _width = vim.api.nvim_win_get_width(curr_win_id)
 	local num = tostring(number)
+
 	local highlight_color
-	local curr_win_config
 	local hor_constant
 	local num_ascii
 	local content
 	local height
 	local width
 
-	if vim.api.nvim_win_is_valid(curr_win_id) then
-		curr_win_config = vim.api.nvim_win_get_config(curr_win_id)
-		if not curr_win_config.focusable then
-			return 1
-		end
+	if not curr_win_config.focusable then
+		return 1
 	end
 
 	if const.cache[num] == nil then
