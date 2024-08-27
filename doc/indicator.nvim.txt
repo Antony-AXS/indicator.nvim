@@ -7,18 +7,18 @@ indicator.nvim.txt                      Plugin Documentation
 
 |INTRODUCTION|                                                                      indicator.nvim
 
-indicator.nvim is a lightweight plugin for indicating window numbers on the screen, 
-allowing easy navigation through windows in a tab. 
-It also includes a window highlight feature that activates while jumping between windows in a tab.
+ indicator.nvim is a lightweight plugin for indicating window numbers on the screen, 
+ allowing easy navigation through windows in a tab. 
+ It also includes a window highlight feature that activates while jumping between windows in a tab.
 
 =========================================================================================================
 
 CONTENTS                                                                          *indicator_contents*
 
-Table of Contents:                                                  |indicator.nvim-table-of-contents|
-1. Commands ......................................................  |indicator.nvim-commands|
-2. Functions .....................................................  |indicator.nvim-functions|
-3. Configuration .................................................  |indicator.nvim-configuration|
+ Table of Contents:                                                  |indicator.nvim-table-of-contents|
+ 1. Commands ......................................................  |indicator.nvim-commands|
+ 2. Functions .....................................................  |indicator.nvim-functions|
+ 3. Configuration .................................................  |indicator.nvim-configuration|
 
 =========================================================================================================
 
@@ -42,7 +42,7 @@ Table of Contents:                                                  |indicator.n
 
 2. FUNCTIONS                                                                      *indicator_functions*
 
-  indicateCurrent({timer})
+  |indicateCurrent|({timer})
 
      - This function indicates the window where the cursor is currently located.
      - It's done by displaying the window number at the top right corner of each window.
@@ -55,7 +55,7 @@ Table of Contents:                                                  |indicator.n
 
   ------------------------------------------------------------------------------------------------------
 
-  indicateAll({timer})
+  |indicateAll|({timer})
 
      - This function indicates all the open windows in the current working tab.
      - It's done by displaying the window number at the top right corner of each window.
@@ -85,5 +85,5 @@ Table of Contents:                                                  |indicator.n
                 end
               }
 <
---------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------
 vim:tw=80:ts=2:ft=help:norl:syntax=help:
