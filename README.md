@@ -1,13 +1,13 @@
 # indicator.nvim
 
 ### What is Indicator.nvim ?
-indicator.nvim is a lightweight plugin for indicating window numbers on the screen, 
-allowing easy navigation through windows in a tab. 
-It also includes a window highlight feature that activates while jumping between windows in a tab.
+indicator.nvim is a lightweight plugin that displays window numbers on the screen, 
+making it easy to navigate through windows in a tab. 
+It also highlights the window you jump into, enhancing your navigation experience.
 
 ### Preview
 
-[Screencast from 21-08-24 08:50:17 PM IST.webm](https://github.com/user-attachments/assets/072ebf80-9028-4d80-93c7-03c0a566ac38)
+![r_inidcaotr](https://github.com/user-attachments/assets/cff899b1-3650-452f-85f6-c1d14d569e6c)
 
 ### Required
 
