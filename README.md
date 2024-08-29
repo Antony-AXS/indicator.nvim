@@ -1,7 +1,7 @@
 # indicator.nvim
 
 ### What is Indicator.nvim ?
-indicator.nvim is a lightweight plugin that displays window numbers on the screen, 
+Indicator.nvim is a lightweight plugin that displays window numbers on the screen, 
 making it easy to navigate through windows in a tab. 
 It also highlights the window you jump into, enhancing your navigation experience.
 
@@ -47,7 +47,7 @@ It also highlights the window you jump into, enhancing your navigation experienc
 | `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime                    |
 
 
-### KeyMaps for Indicator Functions
+### Keymaps for Indicator Functions
 
 ```lua
   vim.keymap.set("n", "<leader>bx", function()
