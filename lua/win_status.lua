@@ -2,13 +2,9 @@ local x, _ = pcall(require, "lualine")
 
 local M = {}
 
-if not x then
-	return vim.notify("Lualine is not Installed")
-end
+local sections = _.get_config().sections
 
-local sections = require("lualine").get_config().sections
-
-local lualineTbl = {
+local lualineSectTbl = {
 	x = "lualine_x",
 	y = "lualine_y",
 	z = "lualine_z",
@@ -70,36 +66,39 @@ local window_count = function(activate, position, tbl)
 end
 
 M.setTabAndWindowStatus = function(opts)
+	if not x then
+		return vim.notify("Lualine is not Installed")
+	end
+
 	local tab_config
 	local window_config
+	local sections = {}
 
-	if next(opts.tab) and opts.tab.position and opts.tab.position.section then
-		tab_config = lualineTbl[opts.tab.position.section]
-	else
-		tab_config = "lualine_x"
+	if next(opts) and opts.tab and opts.tab.activate then
+		if opts.tab.position and opts.tab.position.section then
+			tab_config = lualineSectTbl[opts.tab.position.section]
+		else
+			tab_config = "lualine_x"
+		end
+		local for_tab = sections[tab_config]
+		local tab_position = opts.tab.position and opts.tab.position.index or nil
+		tab_count(opts.tab.activate, tab_position, for_tab)
+		sections[tab_config] = for_tab
 	end
 
-	if next(opts.window) and opts.window.position and opts.window.position.section then
-		window_config = lualineTbl[opts.window.position.section]
-	else
-		window_config = "lualine_x"
+	if next(opts) and opts.window and opts.window.activate then
+		if opts.window.position and opts.window.position.section then
+			window_config = lualineSectTbl[opts.window.position.section]
+		else
+			window_config = "lualine_x"
+		end
+		local for_window = sections[window_config]
+		local window_position = opts.window.position and opts.window.position.index or nil
+		window_count(opts.tab.activate, window_position, for_window)
+		sections[window_config] = for_window
 	end
 
-	local for_tab = sections[tab_config]
-	local for_window = sections[window_config]
-
-	local tab_position = opts.tab.position and opts.tab.position.index or nil
-	local window_position = opts.window.position and opts.window.position.index or nil
-
-	tab_count(opts.tab.activate, tab_position, for_tab)
-	window_count(opts.tab.activate, window_position, for_window)
-
-	require("lualine").setup({
-		sections = {
-			[tab_config] = for_tab,
-			[window_config] = for_window,
-		},
-	})
+	_.setup({ sections = sections })
 	return 0
 end
 
