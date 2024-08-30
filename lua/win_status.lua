@@ -72,7 +72,7 @@ M.setTabAndWindowStatus = function(opts)
 
 	local tab_config
 	local window_config
-	local sections = {}
+	local new_sections = {}
 
 	if next(opts) and opts.tab and opts.tab.activate then
 		if opts.tab.position and opts.tab.position.section then
@@ -83,7 +83,7 @@ M.setTabAndWindowStatus = function(opts)
 		local for_tab = sections[tab_config]
 		local tab_position = opts.tab.position and opts.tab.position.index or nil
 		tab_count(opts.tab.activate, tab_position, for_tab)
-		sections[tab_config] = for_tab
+		new_sections[tab_config] = for_tab
 	end
 
 	if next(opts) and opts.window and opts.window.activate then
@@ -95,10 +95,10 @@ M.setTabAndWindowStatus = function(opts)
 		local for_window = sections[window_config]
 		local window_position = opts.window.position and opts.window.position.index or nil
 		window_count(opts.tab.activate, window_position, for_window)
-		sections[window_config] = for_window
+		new_sections[window_config] = for_window
 	end
 
-	_.setup({ sections = sections })
+	_.setup({ sections = new_sections })
 	return 0
 end
 
