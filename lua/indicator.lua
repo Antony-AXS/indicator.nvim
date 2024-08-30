@@ -210,7 +210,9 @@ M.setup = function(config)
 	end
 
 	if config.window_count_status then
-		status.tabAndWindowStatus(config.window_count_status)
+		if status then
+			status.setTabAndWindowStatus(config.window_count_status)
+		end
 	end
 end
 
