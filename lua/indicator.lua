@@ -1,5 +1,6 @@
 local fn = require("utils.fn")
 local const = require("constants")
+local status = require("win_status")
 local ascii = require("ascii.digits")
 
 local M = {}
@@ -206,6 +207,10 @@ M.setup = function(config)
 
 	if config.window_highlight_event then
 		M.window_highlight_event_activate()
+	end
+
+	if config.window_count_status then
+		status.tabAndWindowStatus(config.window_count_status)
 	end
 end
 
