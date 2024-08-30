@@ -5,6 +5,9 @@ local M = {}
 local sections = _.get_config().sections
 
 local lualineSectTbl = {
+	a = "lualine_a",
+	b = "lualine_b",
+	c = "lualine_c",
 	x = "lualine_x",
 	y = "lualine_y",
 	z = "lualine_z",
@@ -72,7 +75,6 @@ M.setTabAndWindowStatus = function(opts)
 
 	local tab_config
 	local window_config
-	local new_sections = {}
 
 	if next(opts) and opts.tab and opts.tab.activate then
 		if opts.tab.position and opts.tab.position.section then
@@ -83,7 +85,6 @@ M.setTabAndWindowStatus = function(opts)
 		local for_tab = sections[tab_config]
 		local tab_position = opts.tab.position and opts.tab.position.index or nil
 		tab_count(opts.tab.activate, tab_position, for_tab)
-		new_sections[tab_config] = for_tab
 	end
 
 	if next(opts) and opts.window and opts.window.activate then
@@ -95,10 +96,9 @@ M.setTabAndWindowStatus = function(opts)
 		local for_window = sections[window_config]
 		local window_position = opts.window.position and opts.window.position.index or nil
 		window_count(opts.tab.activate, window_position, for_window)
-		new_sections[window_config] = for_window
 	end
 
-	_.setup({ sections = new_sections })
+	_.setup({ sections = sections })
 	return 0
 end
 
