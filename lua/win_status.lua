@@ -36,7 +36,7 @@ local tab_count = function(activate, position, tbl)
 
 			padding = { left = 1, right = 1 },
 		}
-		table.insert(tbl, position or 1, component)
+		table.insert(tbl, position or 2, component)
 	end
 end
 
@@ -45,7 +45,7 @@ local window_count = function(activate, position, tbl)
 	if activate and x == true then
 		component = {
 			function()
-				local Icon = " "
+				local Icon = "󱇿 "
 				if #vim.api.nvim_list_tabpages() == 1 then
 					return (Icon .. vim.fn.winnr() .. "|" .. #vim.api.nvim_tabpage_list_wins(0))
 				else
@@ -65,11 +65,11 @@ local window_count = function(activate, position, tbl)
 			},
 			padding = { left = 1, right = 1 },
 		}
-		table.insert(tbl, position or 2, component)
+		table.insert(tbl, position or 1, component)
 	end
 end
 
-M.tabAndWindowStatus = function(opts)
+M.setTabAndWindowStatus = function(opts)
 	local for_tab = sections[lualineTbl[opts.tab.position.section] or "lualine_x"]
 	local for_window = sections[lualineTbl[opts.window.position.section] or "lualine_x"]
 
@@ -78,10 +78,11 @@ M.tabAndWindowStatus = function(opts)
 
 	require("lualine").setup({
 		sections = {
-			[opts.tab.position.section] = for_tab,
-			[opts.window.position.section] = for_window,
+			[lualineTbl[opts.tab.position.section]] = for_tab,
+			[lualineTbl[opts.window.position.section]] = for_window,
 		},
 	})
+	return 0
 end
 
 return M
