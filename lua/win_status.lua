@@ -70,16 +70,34 @@ local window_count = function(activate, position, tbl)
 end
 
 M.setTabAndWindowStatus = function(opts)
-	local for_tab = sections[lualineTbl[opts.tab.position.section] or "lualine_x"]
-	local for_window = sections[lualineTbl[opts.window.position.section] or "lualine_x"]
+	local tab_config
+	local window_config
 
-	tab_count(opts.tab.activate, opts.tab.position.index, for_tab)
-	window_count(opts.tab.activate, opts.tab.position.index, for_window)
+	if next(opts.tab) and opts.tab.position and opts.tab.position.section then
+		tab_config = lualineTbl[opts.tab.position.section]
+	else
+		tab_config = "lualine_x"
+	end
+
+	if next(opts.window) and opts.window.position and opts.window.position.section then
+		window_config = lualineTbl[opts.window.position.section]
+	else
+		window_config = "lualine_x"
+	end
+
+	local for_tab = sections[tab_config]
+	local for_window = sections[window_config]
+
+	local tab_position = opts.tab.position and opts.tab.position.index or nil
+	local window_position = opts.window.position and opts.window.position.index or nil
+
+	tab_count(opts.tab.activate, tab_position, for_tab)
+	window_count(opts.tab.activate, window_position, for_window)
 
 	require("lualine").setup({
 		sections = {
-			[lualineTbl[opts.tab.position.section]] = for_tab,
-			[lualineTbl[opts.window.position.section]] = for_window,
+			[tab_config] = for_tab,
+			[window_config] = for_window,
 		},
 	})
 	return 0
