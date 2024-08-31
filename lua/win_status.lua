@@ -14,75 +14,69 @@ local lualineSectTbl = {
 	z = "lualine_z",
 }
 
-local tab_count = function(activate, position, tbl)
-	local component
-	if activate and x == true then
-		component = {
-			function()
-				local Icon = "󱓷 "
-				if #vim.api.nvim_list_tabpages() > 1 then
-					return (Icon .. vim.fn.tabpagenr() .. "|" .. (#vim.api.nvim_list_tabpages()))
-				else
-					return ""
-				end
-			end,
-			color = function()
-				if #vim.api.nvim_list_tabpages() > 1 then
-					return { fg = "#FFA500", gui = "bold" }
-				else
-					return { fg = "grey", gui = "bold" }
-				end
-			end,
+local tab_count = function(position, tbl)
+	local component = {
+		function()
+			local Icon = "󱓷 "
+			if #vim.api.nvim_list_tabpages() > 1 then
+				return (Icon .. vim.fn.tabpagenr() .. "|" .. (#vim.api.nvim_list_tabpages()))
+			else
+				return ""
+			end
+		end,
+		color = function()
+			if #vim.api.nvim_list_tabpages() > 1 then
+				return { fg = "#FFA500", gui = "bold" }
+			else
+				return { fg = "grey", gui = "bold" }
+			end
+		end,
 
-			padding = { left = 1, right = 1 },
-		}
-		table.insert(tbl, position or 2, component)
-	end
+		padding = { left = 1, right = 1 },
+	}
+	table.insert(tbl, position or 2, component)
 end
 
-local window_count = function(activate, position, tbl)
-	local component
-	if activate and x == true then
-		component = {
-			function()
-				local Icon = "󱇿 "
-
-				if #vim.api.nvim_list_tabpages() == 1 then
-					if #vim.api.nvim_tabpage_list_wins(0) ~= 1 then
-						return (
-							Icon
-							.. vim.fn.winnr()
-							.. "|"
-							.. (#vim.api.nvim_tabpage_list_wins(0) - const.open_win_count)
-						)
-					else
-						const.open_win_count = 0
-						return (Icon .. vim.fn.winnr() .. "|" .. (#vim.api.nvim_tabpage_list_wins(0)))
-					end
-				else
+local window_count = function(position, tbl)
+	local component = {
+		function()
+			local Icon = "󱇿 "
+			if #vim.api.nvim_list_tabpages() == 1 then
+				if #vim.api.nvim_tabpage_list_wins(0) ~= 1 then
 					return (
 						Icon
 						.. vim.fn.winnr()
 						.. "|"
-						.. (#vim.api.nvim_tabpage_list_wins(0))
-						.. "|"
-						.. (#vim.api.nvim_list_wins())
+						.. (#vim.api.nvim_tabpage_list_wins(0) - const.open_win_count)
 					)
+				else
+					const.open_win_count = 0
+					return (Icon .. vim.fn.winnr() .. "|" .. (#vim.api.nvim_tabpage_list_wins(0)))
 				end
-			end,
-			color = {
-				fg = "#a9ff0a",
-				gui = "bold",
-			},
-			padding = { left = 1, right = 1 },
-		}
-		table.insert(tbl, position or 1, component)
-	end
+			else
+				return (
+					Icon
+					.. vim.fn.winnr()
+					.. "|"
+					.. (#vim.api.nvim_tabpage_list_wins(0))
+					.. "|"
+					.. (#vim.api.nvim_list_wins())
+				)
+			end
+		end,
+		color = {
+			fg = "#a9ff0a",
+			gui = "bold",
+		},
+		padding = { left = 1, right = 1 },
+	}
+	table.insert(tbl, position or 1, component)
 end
 
 M.setTabAndWindowStatus = function(opts)
 	if not x then
-		return vim.notify("Lualine is not Installed")
+		local message = "Indicator.nvim [Warning]: Can't use Window Status Feature, Lualine not Installed"
+		return vim.notify(message, vim.log.levels.WARN)
 	end
 
 	local tab_config
@@ -96,7 +90,7 @@ M.setTabAndWindowStatus = function(opts)
 		end
 		local for_tab = sections[tab_config]
 		local tab_position = opts.tab.position and opts.tab.position.index or nil
-		tab_count(opts.tab.activate, tab_position, for_tab)
+		tab_count(tab_position, for_tab)
 	end
 
 	if next(opts) and opts.window and opts.window.activate then
@@ -107,7 +101,7 @@ M.setTabAndWindowStatus = function(opts)
 		end
 		local for_window = sections[window_config]
 		local window_position = opts.window.position and opts.window.position.index or nil
-		window_count(opts.tab.activate, window_position, for_window)
+		window_count(window_position, for_window)
 	end
 
 	_.setup({ sections = sections })
