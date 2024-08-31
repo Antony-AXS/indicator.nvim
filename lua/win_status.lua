@@ -1,3 +1,4 @@
+local const = require("constants")
 local x, _ = pcall(require, "lualine")
 
 local M = {}
@@ -45,17 +46,18 @@ local window_count = function(activate, position, tbl)
 		component = {
 			function()
 				local Icon = "󱇿 "
-				if #vim.api.nvim_list_tabpages() == 1 then
-					return (Icon .. vim.fn.winnr() .. "|" .. #vim.api.nvim_tabpage_list_wins(0))
+				local in_tab_count
+
+				if #vim.api.nvim_tabpage_list_wins(0) ~= 1 then
+					in_tab_count = (#vim.api.nvim_tabpage_list_wins(0) - const.open_win_count)
 				else
-					return (
-						Icon
-						.. vim.fn.winnr()
-						.. "|"
-						.. (#vim.api.nvim_tabpage_list_wins(0))
-						.. "|"
-						.. (#vim.api.nvim_list_wins())
-					)
+					in_tab_count = 1
+				end
+
+				if #vim.api.nvim_list_tabpages() == 1 then
+					return (Icon .. vim.fn.winnr() .. "|" .. in_tab_count)
+				else
+					return (Icon .. vim.fn.winnr() .. "|" .. in_tab_count .. "|" .. (#vim.api.nvim_list_wins()))
 				end
 			end,
 			color = {
