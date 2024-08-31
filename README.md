@@ -14,6 +14,11 @@ It also highlights the window you jump into, enhancing your navigation experienc
 -   `neovim >= 0.10`
 -   `plenary.nvim`
 
+### Optional
+
+-   [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - (for window and tab count indication on statusbar)
+
+
 ## ⇁ Installation
 * neovim 0.10 + required
 * make sure a nerdfont is added in your terminal emulator, if not download from : https://www.nerdfonts.com/
@@ -86,6 +91,37 @@ It also highlights the window you jump into, enhancing your navigation experienc
 ```lua
  vim.keymap.set("n", "<leader>iq", Indicator.window_highlight_event_activate, {})
  vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_deactivate, {})
+```
+## Status Line Indication
+If you have [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) window and tab count stats can be inidcated on the statusbar.
+
+window count has three parameters:
+  * 1st is the window number you cursor is in.
+  * 2nd is the total number of windows that are open in the current tab.
+  * 3rd is the total window count in all the opened tabs in your neovim instance.
+
+tab count has two parameters:
+  * 1st one indicates the current tab you are in.
+  * 2nd is indicates the total number of tabs open in neovim instance.
+
+### Preview
+![status_bar_3](https://github.com/user-attachments/assets/7caf6268-9e3b-48cf-bf27-28f3d485e88f)
+![status_bar_2](https://github.com/user-attachments/assets/af12c04f-e6f4-4313-bd7e-f5be55d05d18)
+
+### Setup
+```lua
+ Indicator.setup({
+   window_count_status = {
+ 	 tab = {
+ 	   activate = true,
+ 	   position = { section = "x", index = 1 },
+ 	 },
+ 	 window = {
+ 	   activate = true,
+ 	   position = { section = "x", index = 1 },
+ 	 },
+   },
+ })
 ```
 
 ## Help Doc
