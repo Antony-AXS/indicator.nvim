@@ -92,12 +92,16 @@ local indicator = function(timer, win_id, bloat)
 	})
 
 	if win_res ~= nil and win_res.win_id ~= nil then
+		const.cache.open_win_count = const.cache.open_win_count + 1
 		const.cache[num].win_id = win_res.win_id
+		const.cache[num].status = 1
 	end
 
 	vim.defer_fn(function()
 		if vim.api.nvim_win_is_valid(win_res.win_id) then
 			vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
+			const.cache.open_win_count = const.cache.open_win_count - 1
+			const.cache[num].status = 0
 		end
 	end, (timer or const.indicator_timer))
 end
