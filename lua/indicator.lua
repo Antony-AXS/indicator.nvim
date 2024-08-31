@@ -100,11 +100,15 @@ local indicator = function(timer, win_id, bloat)
 	vim.defer_fn(function()
 		if vim.api.nvim_win_is_valid(win_res.win_id) then
 			vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
-			const.open_win_count = const.open_win_count - 1
 			const.cache[num].status = 0
 		end
+		const.open_win_count = const.open_win_count - 1
 	end, (timer or const.indicator_timer))
 end
+
+vim.keymap.set("n", "<leader>in", function()
+	vim.notify("open window count" .. " : " .. tostring(const.open_win_count))
+end)
 
 local window_highlight = function()
 	local win_id = vim.api.nvim_get_current_win()

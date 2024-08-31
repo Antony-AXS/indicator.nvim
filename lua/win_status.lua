@@ -46,18 +46,28 @@ local window_count = function(activate, position, tbl)
 		component = {
 			function()
 				local Icon = "󱇿 "
-				local in_tab_count
-
-				if #vim.api.nvim_tabpage_list_wins(0) ~= 1 then
-					in_tab_count = (#vim.api.nvim_tabpage_list_wins(0) - const.open_win_count)
-				else
-					in_tab_count = 1
-				end
 
 				if #vim.api.nvim_list_tabpages() == 1 then
-					return (Icon .. vim.fn.winnr() .. "|" .. in_tab_count)
+					if #vim.api.nvim_tabpage_list_wins(0) ~= 1 then
+						return (
+							Icon
+							.. vim.fn.winnr()
+							.. "|"
+							.. (#vim.api.nvim_tabpage_list_wins(0) - const.open_win_count)
+						)
+					else
+						const.open_win_count = 0
+						return (Icon .. vim.fn.winnr() .. "|" .. (#vim.api.nvim_tabpage_list_wins(0)))
+					end
 				else
-					return (Icon .. vim.fn.winnr() .. "|" .. in_tab_count .. "|" .. (#vim.api.nvim_list_wins()))
+					return (
+						Icon
+						.. vim.fn.winnr()
+						.. "|"
+						.. (#vim.api.nvim_tabpage_list_wins(0))
+						.. "|"
+						.. (#vim.api.nvim_list_wins())
+					)
 				end
 			end,
 			color = {
