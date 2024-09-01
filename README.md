@@ -20,10 +20,11 @@ It also highlights the window you jump into, enhancing your navigation experienc
 
 
 ## ⇁ Installation
-* neovim 0.10 + required
-* make sure a nerdfont is added in your terminal emulator, if not download from : https://www.nerdfonts.com/
-* install using your favorite plugin manager (lazy.nvim in this example)
-* keymap examples are also provided, Feel free to change the keymaps to suit your own comfort.
+
+* Neovim 0.10 + required
+* Ensure that a [Nerd Font](https://www.nerdfonts.com/font-downloads) is installed and configured in your terminal emulator.
+* Install using your preferred plugin manager (e.g., `lazy.nvim` in this example).
+* Keymap examples are also provided. Feel free to modify them to suit your preferences.
 
 ```lua
 {
