@@ -146,10 +146,10 @@ M.indicator_event_activate = function()
 			end,
 		})
 		if const.indicator_notify then
-			vim.notify("Indicator Event Triggered")
+			vim.notify("Indicator Event Triggered", vim.log.levels.INFO)
 		end
 	else
-		vim.notify("Indicator Event Already Triggered")
+		vim.notify("Indicator Event Already Triggered", vim.log.levels.INFO)
 	end
 	const.indicator_notify = true
 end
@@ -158,9 +158,9 @@ M.indicator_event_deactivate = function()
 	if const.autocmd_id then
 		vim.api.nvim_del_autocmd(const.autocmd_id)
 		const.autocmd_id = nil
-		vim.notify("Indicator Event Disabled")
+		vim.notify("Indicator Event Disabled", vim.log.levels.INFO)
 	else
-		vim.notify("Indicator Event already Disabled")
+		vim.notify("Indicator Event already Disabled", vim.log.levels.INFO)
 	end
 	const.indicator_notify = true
 end
@@ -169,10 +169,10 @@ M.window_highlight_event_activate = function()
 	if const.win_hilght_acmd_id == nil then
 		const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight })
 		if const.window_notify then
-			vim.notify("Window HighLight Enabled")
+			vim.notify("Window HighLight Enabled", vim.log.levels.INFO)
 		end
 	else
-		vim.notify("Window HighLight Already Enabled")
+		vim.notify("Window HighLight Already Enabled", vim.log.levels.INFO)
 	end
 	const.window_notify = true
 end
@@ -181,9 +181,9 @@ M.window_highlight_event_deactivate = function()
 	if const.win_hilght_acmd_id ~= nil then
 		vim.api.nvim_del_autocmd(const.win_hilght_acmd_id)
 		const.win_hilght_acmd_id = nil
-		vim.notify("Window HighLight Disabled")
+		vim.notify("Window HighLight Disabled", vim.log.levels.INFO)
 	else
-		vim.notify("Window HighLight Already Disabled")
+		vim.notify("Window HighLight Already Disabled", vim.log.levels.INFO)
 	end
 	const.window_notify = true
 end
@@ -194,7 +194,8 @@ vim.api.nvim_create_user_command("Indicator", function(opts)
 	elseif opts.args == "OFF" then
 		M.indicator_event_deactivate()
 	else
-		vim.notify("Please pass the right Indicator Argument, {ON | OFF}")
+		local message = "Please pass the right Indicator Argument, {ON | OFF}"
+		vim.notify(message, vim.log.levels.WARN)
 	end
 end, { nargs = "?" })
 
@@ -204,7 +205,8 @@ vim.api.nvim_create_user_command("IndicatorWinHl", function(opts)
 	elseif opts.args == "OFF" then
 		M.indicator_event_deactivate()
 	else
-		vim.notify("Please pass the right Window Highlight Argument, {ON | OFF}")
+		local message = "Please pass the right Window Highlight Argument, {ON | OFF}"
+		vim.notify(message, vim.log.levels.WARN)
 	end
 end, { nargs = "?" })
 
