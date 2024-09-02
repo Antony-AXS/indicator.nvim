@@ -216,7 +216,7 @@ M.setup = function(config)
 		M.window_highlight_event_activate()
 	end
 
-	if next(config.window_count_status) then
+	if config.window_count_status then
 		if status then
 			status.setTabAndWindowStatus(config.window_count_status)
 		end
