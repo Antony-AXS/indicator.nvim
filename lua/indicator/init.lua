@@ -115,7 +115,7 @@ local window_highlight = function()
 	vim.defer_fn(function()
 		if vim.api.nvim_win_is_valid(win_id) then
 			vim.api.nvim_set_hl(0, "thisWinHighLight", { bg = nil, fg = nil })
-			vim.api.nvim_set_option_value("winhighlight", "Noarmal:thisWinHighLight", { win = win_id })
+			vim.api.nvim_set_option_value("winhighlight", "Normal:ThisWinHighLight", { win = win_id })
 		end
 	end, const.window_timer)
 end

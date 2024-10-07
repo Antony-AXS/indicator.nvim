@@ -42,29 +42,29 @@ CONTENTS                                                                        
 
 2. FUNCTIONS                                                                      *indicator_functions*
 
-    1. |indicateCurrent|({timer})
+    |indicateCurrent|({timer})
   
-        - This function indicates the window where the cursor is currently located.
-        - It's done by displaying the window number at the top right corner of each window.
-        - the function takes in an argument called timer to extend or shorten the display time.
-        - timer argument should be a positive integer, representing the duration in seconds.
-        - timer field is optional if not provided, the display time defaults to |1500| seconds.
+     - This function indicates the window where the cursor is currently located.
+     - It's done by displaying the window number at the top right corner of each window.
+     - the function takes in an argument called timer to extend or shorten the display time.
+     - timer argument should be a positive integer, representing the duration in seconds.
+     - timer field is optional if not provided, the display time defaults to |1500| seconds.
   
-       Parameters:
-          . {timer} (integer|nil) : to set the indicator window lifetime in |seconds|
+     Parameters:
+      . {timer} (integer|nil) : to set the indicator window lifetime in |seconds|
   
   ------------------------------------------------------------------------------------------------------
 
-    2. |indicateAll|({timer})
+    |indicateAll|({timer})
 
-        - This function indicates all the open windows in the current working tab.
-        - It's done by displaying the window number at the top right corner of each window.
-        - the function takes in an argument called timer to extend or shorten the display time.
-        - timer argument should be a positive integer, representing the duration in seconds.
-        - timer field is optional if not provided, the display time defaults to |1500| seconds.
+     - This function indicates all the open windows in the current working tab.
+     - It's done by displaying the window number at the top right corner of each window.
+     - the function takes in an argument called timer to extend or shorten the display time.
+     - timer argument should be a positive integer, representing the duration in seconds.
+     - timer field is optional if not provided, the display time defaults to |1500| seconds.
 
-       Parameters:
-          . {timer} (integer|nil) : to set the indicator window lifetime in |seconds|
+     Parameters:
+      . {timer} (integer|nil) : to set the indicator window lifetime in |seconds|
 
 =========================================================================================================
 

@@ -16,7 +16,7 @@ It also highlights the window you jump into, enhancing your navigation experienc
 
 ### Optional
 
--   [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - (for window and tab count indication on statusbar)
+-   [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - (for window and tab stats indication on status bar)
 
 
 ## ⇁ Installation
@@ -96,13 +96,13 @@ It also highlights the window you jump into, enhancing your navigation experienc
 If you have [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) installed, window and tab count stats can be displayed on the status bar.
 
 #### Tab count has two parameters:
-  * 1st one indicates the current tab you are in.
-  * 2nd indicates the total number of tabs open in the neovim instance.
+  * **1**st one indicates the current tab you are in.
+  * **2**nd indicates the total number of tabs open in the neovim instance.
 
 #### Window count has three parameters:
-  * 1st is the window number you cursor is in.
-  * 2nd is the total number of windows that are open in the current tab.
-  * 3rd is the total window count across all the open tabs in the neovim instance.
+  * **1**st is the window number you cursor is in.
+  * **2**nd is the total number of windows that are open in the current tab.
+  * **3**rd is the total window count across all the open tabs in the neovim instance.
 
 ### Preview
 ![status_bar_3](https://github.com/user-attachments/assets/7caf6268-9e3b-48cf-bf27-28f3d485e88f)
