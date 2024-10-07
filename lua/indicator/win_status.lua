@@ -1,4 +1,4 @@
-local const = require("constants")
+local const = require("indicator/constants")
 local x, _ = pcall(require, "lualine")
 
 local M = {}
@@ -73,10 +73,36 @@ local window_count = function(position, tbl)
 	table.insert(tbl, position or 1, component)
 end
 
+local function validateLualineInstalled()
+	if vim.fn.executable("git") == 0 then
+		return {
+			val = false,
+			message = "Indicator.nvim [Warning]: GIT is not Installed in your System",
+		}
+	end
+	local runtime_paths = vim.api.nvim_list_runtime_paths()
+	for _, path in ipairs(runtime_paths) do
+		if string.match(path, "lualine") then
+			local command = "git --git-dir=" .. path .. "/.git config --get remote.origin.url"
+			local url = vim.fn.system(command)
+			if string.match(url, "nvim%-lualine/lualine.nvim") then
+				return {
+					val = true,
+					message = "Indicator.nvim [INFO]: lualine detected",
+				}
+			end
+		end
+	end
+	return {
+		val = false,
+		message = "Indicator.nvim [Warning]: Can't use Window Status Feature, Lualine not Installed",
+	}
+end
+
 M.setTabAndWindowStatus = function(opts)
-	if not x then
-		local message = "Indicator.nvim [Warning]: Can't use Window Status Feature, Lualine not Installed"
-		return vim.notify(message, vim.log.levels.WARN)
+	local retVal = validateLualineInstalled()
+	if not retVal.val then
+		return vim.notify(retVal.message, vim.log.levels.WARN)
 	end
 
 	local tab_config
