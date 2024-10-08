@@ -1,9 +1,9 @@
 local const = require("indicator/constants")
-local x, _ = pcall(require, "lualine")
+local _, lualine = pcall(require, "lualine")
 
 local M = {}
 
-local sections = _.get_config().sections
+local sections = lualine.get_config().sections
 
 local lualineSectTbl = {
 	a = "lualine_a",
@@ -14,7 +14,7 @@ local lualineSectTbl = {
 	z = "lualine_z",
 }
 
-local tab_count = function(position, tbl)
+local tab_count = function(position, color, tbl)
 	local component = {
 		function()
 			local Icon = "󱓷 "
@@ -26,7 +26,7 @@ local tab_count = function(position, tbl)
 		end,
 		color = function()
 			if #vim.api.nvim_list_tabpages() > 1 then
-				return { fg = "#FFA500", gui = "bold" }
+				return { fg = color or "#FFA500", gui = "bold" }
 			else
 				return { fg = "grey", gui = "bold" }
 			end
@@ -37,7 +37,7 @@ local tab_count = function(position, tbl)
 	table.insert(tbl, position or 2, component)
 end
 
-local window_count = function(position, tbl)
+local window_count = function(position, color, tbl)
 	local component = {
 		function()
 			local Icon = "󱇿 "
@@ -65,7 +65,7 @@ local window_count = function(position, tbl)
 			end
 		end,
 		color = {
-			fg = "#a9ff0a",
+			fg = color or "#a9ff0a",
 			gui = "bold",
 		},
 		padding = { left = 1, right = 1 },
@@ -77,7 +77,8 @@ local function validateLualineInstalled()
 	if vim.fn.executable("git") == 0 then
 		return {
 			val = false,
-			message = "Indicator.nvim [Warning]: GIT is not Installed in your System",
+			type = "ERROR",
+			message = "Indicator.nvim [ERROR]: GIT not found (required for lualine validation),\nplease install GIT or disable window-count-stats feature",
 		}
 	end
 	local runtime_paths = vim.api.nvim_list_runtime_paths()
@@ -88,21 +89,23 @@ local function validateLualineInstalled()
 			if string.match(url, "nvim%-lualine/lualine.nvim") then
 				return {
 					val = true,
-					message = "Indicator.nvim [INFO]: lualine detected",
+					type = "INFO",
+					message = "Indicator.nvim [SUCCESS]: lualine plugin detected",
 				}
 			end
 		end
 	end
 	return {
 		val = false,
-		message = "Indicator.nvim [Warning]: Can't use Window Status Feature, Lualine not Installed",
+		type = "WARN",
+		message = "Indicator.nvim [WARNING]: Can't use Window Status Feature, Lualine not Installed",
 	}
 end
 
 M.setTabAndWindowStatus = function(opts)
 	local retVal = validateLualineInstalled()
 	if not retVal.val then
-		return vim.notify(retVal.message, vim.log.levels.WARN)
+		return vim.notify(retVal.message, vim.log.levels[retVal.type])
 	end
 
 	local tab_config
@@ -116,7 +119,8 @@ M.setTabAndWindowStatus = function(opts)
 		end
 		local for_tab = sections[tab_config]
 		local tab_position = opts.tab.position and opts.tab.position.index or nil
-		tab_count(tab_position, for_tab)
+		local color = opts.tab.color or nil
+		tab_count(tab_position, color, for_tab)
 	end
 
 	if next(opts) and opts.window and opts.window.activate then
@@ -127,10 +131,11 @@ M.setTabAndWindowStatus = function(opts)
 		end
 		local for_window = sections[window_config]
 		local window_position = opts.window.position and opts.window.position.index or nil
-		window_count(window_position, for_window)
+		local color = opts.window.color or nil
+		window_count(window_position, color, for_window)
 	end
 
-	_.setup({ sections = sections })
+	lualine.setup({ sections = sections })
 	return 0
 end
 
