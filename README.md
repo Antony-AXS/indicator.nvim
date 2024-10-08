@@ -95,11 +95,11 @@ It also highlights the window you jump into, enhancing your navigation experienc
 ## Status Line Indication
 If you have [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) installed, window and tab count stats can be displayed on the status bar.
 
-#### Tab count has two parameters:
+#### Tab count has two variables:
   * **1**st one indicates the current tab you are in.
   * **2**nd indicates the total number of tabs open in the neovim instance.
 
-#### Window count has three parameters:
+#### Window count has three variables:
   * **1**st is the window number you cursor is in.
   * **2**nd is the total number of windows that are open in the current tab.
   * **3**rd is the total window count across all the open tabs in the neovim instance.
@@ -117,10 +117,12 @@ They will only be displayed if more than one tab is open.<br>
    tab = {
      activate = true, -- Displays the tab stats on the status bar.
      position = { section = "x", index = 1 }, -- To configure the position of the tab stats.
+     color = "" -- Sets the color of tab stats. If not set, the default color will be yellow.
    },
    window = {
      activate = true, -- Displays the window stats on the status bar.
      position = { section = "x", index = 1 }, -- To configure the position of the window stats.
+     color = "" -- Sets the color of window stats. If not set, the default color will be yellow.
    },
   },
  })
