@@ -117,9 +117,16 @@ M.setTabAndWindowStatus = function(opts)
 		else
 			tab_config = "lualine_x"
 		end
+
+		local color
+		if opts.tab.color == "" then
+			color = nil
+		else
+			color = opts.window.color
+		end
 		local for_tab = sections[tab_config]
 		local tab_position = opts.tab.position and opts.tab.position.index or nil
-		local color = opts.tab.color or nil
+
 		tab_count(tab_position, color, for_tab)
 	end
 
@@ -129,9 +136,16 @@ M.setTabAndWindowStatus = function(opts)
 		else
 			window_config = "lualine_x"
 		end
+
+		local color
+		if opts.window.color == "" then
+			color = nil
+		else
+			color = opts.window.color
+		end
 		local for_window = sections[window_config]
 		local window_position = opts.window.position and opts.window.position.index or nil
-		local color = opts.window.color or nil
+
 		window_count(window_position, color, for_window)
 	end
 
