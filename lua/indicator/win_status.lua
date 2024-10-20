@@ -124,6 +124,7 @@ M.setTabAndWindowStatus = function(opts)
 		else
 			color = opts.window.color
 		end
+
 		local for_tab = sections[tab_config]
 		local tab_position = opts.tab.position and opts.tab.position.index or nil
 
@@ -143,6 +144,7 @@ M.setTabAndWindowStatus = function(opts)
 		else
 			color = opts.window.color
 		end
+
 		local for_window = sections[window_config]
 		local window_position = opts.window.position and opts.window.position.index or nil
 
