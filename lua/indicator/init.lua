@@ -200,7 +200,7 @@ M.window_highlight_event_deactivate = function()
 	const.window_notify = true
 end
 
-M.window_manager = function(timer)
+M.windowManagement = function(timer)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
