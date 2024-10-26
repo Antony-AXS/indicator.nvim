@@ -113,23 +113,24 @@ local indicator = function(timer, win_id, bloat, disp_win_cls)
 end
 
 local window_highlight = function()
+	vim.api.nvim_set_hl(0, "IndCurrWinHiglt", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
+	vim.api.nvim_set_hl(0, "IndRestWinHiglt", { bg = nil, fg = nil })
+
 	local curr_win_id = vim.api.nvim_get_current_win()
 	local all_open_win = vim.api.nvim_list_wins()
 
 	for _, id in ipairs(all_open_win) do
 		if id == curr_win_id then
-			vim.api.nvim_set_hl(0, "IndCurrWinHiglt", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
+			vim.api.nvim_set_option_value("winhl", "Normal:IndCurrWinHiglt", { win = curr_win_id })
 		else
-			vim.api.nvim_set_hl(0, "IndRestWinHiglt", { bg = nil, fg = nil })
+			vim.api.nvim_set_option_value("winhl", "Normal:IndRestWinHiglt", { win = id })
 		end
 	end
-
-	vim.api.nvim_set_option_value("winhighlight", "Normal:IndCurrWinHiglt", { win = curr_win_id })
 
 	vim.defer_fn(function()
 		if vim.api.nvim_win_is_valid(curr_win_id) then
 			vim.api.nvim_set_hl(0, "IndCurrWinHiglt", { bg = nil, fg = nil })
-			vim.api.nvim_set_option_value("winhighlight", "Normal:IndCurrWinHiglt", { win = curr_win_id })
+			vim.api.nvim_set_option_value("winhl", "Normal:IndCurrWinHiglt", { win = curr_win_id })
 		end
 	end, const.window_timer)
 end
