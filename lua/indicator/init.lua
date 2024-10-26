@@ -113,14 +113,23 @@ local indicator = function(timer, win_id, bloat, disp_win_cls)
 end
 
 local window_highlight = function()
-	local win_id = vim.api.nvim_get_current_win()
-	vim.api.nvim_set_hl(0, "ThisWinHighLight", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
-	vim.api.nvim_set_option_value("winhighlight", "Normal:ThisWinHighLight", { win = win_id })
+	local curr_win_id = vim.api.nvim_get_current_win()
+	local all_open_win = vim.api.nvim_list_wins()
+
+	for _, id in ipairs(all_open_win) do
+		if id == curr_win_id then
+			vim.api.nvim_set_hl(0, "IndCurrWinHiglt", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
+		else
+			vim.api.nvim_set_hl(0, "IndRestWinHiglt", { bg = nil, fg = nil })
+		end
+	end
+
+	vim.api.nvim_set_option_value("winhighlight", "Normal:IndCurrWinHiglt", { win = curr_win_id })
 
 	vim.defer_fn(function()
-		if vim.api.nvim_win_is_valid(win_id) then
-			vim.api.nvim_set_hl(0, "thisWinHighLight", { bg = nil, fg = nil })
-			vim.api.nvim_set_option_value("winhighlight", "Normal:ThisWinHighLight", { win = win_id })
+		if vim.api.nvim_win_is_valid(curr_win_id) then
+			vim.api.nvim_set_hl(0, "IndCurrWinHiglt", { bg = nil, fg = nil })
+			vim.api.nvim_set_option_value("winhighlight", "Normal:IndCurrWinHiglt", { win = curr_win_id })
 		end
 	end, const.window_timer)
 end
@@ -193,6 +202,7 @@ end
 M.window_manager = function(timer)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
+
 	for _, win_id in ipairs(window_ids) do
 		indicator(timer, win_id, true, true)
 	end
@@ -210,12 +220,13 @@ M.window_manager = function(timer)
 		local key = table.concat(key_tbl)
 
 		local command
+		local cmd_str = "wincmd" .. " "
 		if string.match(key, "%dw") then
-			command = "wincmd" .. " " .. key
+			command = cmd_str .. key
 		elseif string.match(key, "%dq") then
-			command = "wincmd" .. " " .. key
+			command = cmd_str .. key
 		elseif string.match(key, "%do") then
-			command = "wincmd" .. " " .. key
+			command = cmd_str .. key
 		elseif string.match(key, "x") then
 			command = ""
 			local msg = "Indicator.nvim [WARNING] : 1st character should be a digit."
