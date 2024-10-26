@@ -23,8 +23,10 @@ It also highlights the window you jump into, enhancing your navigation experienc
 
 * Neovim 0.10 + required
 * Ensure that a [Nerd Font](https://www.nerdfonts.com/font-downloads) is installed and configured in your terminal emulator.
-* Install using your preferred plugin manager (e.g., `lazy.nvim` in this example).
+* Install using your preferred plugin manager (e.g., `lazy.nvim` and `packer.nvim`).
 * Keymap examples are also provided. Feel free to modify them to suit your preferences.
+
+### [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
 {
@@ -41,6 +43,26 @@ It also highlights the window you jump into, enhancing your navigation experienc
    end
 }
 ```
+
+### [packer.nvim](https://github.com/wbthomason/packer.nvim)
+
+```lua
+use {
+  "Antony-AXS/indicator.nvim",
+  event = "VimEnter",
+  requires = { "nvim-lua/plenary.nvim" },
+  config = function()
+    local Indicator = require("indicator")
+    
+    Indicator.setup({
+      indicator_event = true, -- turns ON the Indicator feature by default
+      window_highlight_event = false,
+    })
+  end
+}
+```
+<br>
+
 ### Indicator Functions
 
 | Functions                                     | Description                                                                           |
