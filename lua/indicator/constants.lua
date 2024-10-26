@@ -6,5 +6,6 @@ return {
 	indicator_timer = 1500,
 	window_notify = false,
 	indicator_notify = false,
+	disp_ind_win_meta = {},
 	win_hilght_acmd_id = nil,
 }

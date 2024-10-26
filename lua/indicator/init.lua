@@ -5,7 +5,7 @@ local ascii = require("indicator.ascii.digits")
 
 local M = {}
 
-local indicator = function(timer, win_id, bloat)
+local indicator = function(timer, win_id, bloat, disp_win_cls)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 
 	if not vim.api.nvim_win_is_valid(curr_win_id) then
@@ -98,13 +98,18 @@ local indicator = function(timer, win_id, bloat)
 		const.cache[num].status = 1
 	end
 
-	vim.defer_fn(function()
-		if vim.api.nvim_win_is_valid(win_res.win_id) then
-			vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
-			const.open_win_count = const.open_win_count - 1
-			const.cache[num].status = 0
-		end
-	end, (timer or const.indicator_timer))
+	if disp_win_cls then
+		table.insert(const.disp_ind_win_meta, { num = num, win_id = win_res.win_id })
+		return
+	else
+		vim.defer_fn(function()
+			if vim.api.nvim_win_is_valid(win_res.win_id) then
+				vim.api.nvim_win_close(win_res.win_id, true) -- (window, force)
+				const.open_win_count = const.open_win_count - 1
+				const.cache[num].status = 0
+			end
+		end, (timer or const.indicator_timer))
+	end
 end
 
 local window_highlight = function()
@@ -121,7 +126,7 @@ local window_highlight = function()
 end
 
 M.indicateCurrent = function(timer)
-	indicator(timer, nil, true)
+	indicator(timer, nil, true, false)
 end
 
 M.indicateAll = function(timer)
@@ -129,7 +134,7 @@ M.indicateAll = function(timer)
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
 	for _, win_id in ipairs(window_ids) do
-		indicator(timer, win_id, true)
+		indicator(timer, win_id, true, false)
 	end
 end
 
@@ -183,6 +188,55 @@ M.window_highlight_event_deactivate = function()
 		vim.notify("Window HighLight Already Disabled", vim.log.levels.INFO)
 	end
 	const.window_notify = true
+end
+
+M.window_manager = function(timer)
+	local current_tabpage = vim.api.nvim_get_current_tabpage()
+	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
+	for _, win_id in ipairs(window_ids) do
+		indicator(timer, win_id, true, true)
+	end
+
+	vim.schedule(function()
+		local key_tbl = {}
+		for _ = 1, 2 do
+			local char = vim.fn.nr2char(vim.fn.getchar())
+			if _ == 1 and string.match(char, "%D") then
+				table.insert(key_tbl, "x")
+				break
+			end
+			table.insert(key_tbl, char)
+		end
+		local key = table.concat(key_tbl)
+
+		local command
+		if string.match(key, "%dw") then
+			command = "wincmd" .. " " .. key
+		elseif string.match(key, "%dq") then
+			command = "wincmd" .. " " .. key
+		elseif string.match(key, "%do") then
+			command = "wincmd" .. " " .. key
+		elseif string.match(key, "x") then
+			command = ""
+			local msg = "Indicator.nvim [WARNING] : 1st character should be a digit."
+			vim.notify(msg, vim.log.levels.WARN)
+		else
+			command = ""
+			local msg_1 = "Indicator.nvim [WARNING]: Invalid window-management command,"
+			local msg_2 = "(w,o,q are considered valid)."
+			vim.notify(msg_1 .. " " .. msg_2, vim.log.levels.WARN)
+		end
+
+		vim.cmd(command)
+
+		for _, win_res in ipairs(const.disp_ind_win_meta) do
+			if vim.api.nvim_win_is_valid(win_res.win_id) then
+				vim.api.nvim_win_close(win_res.win_id, true)
+				const.open_win_count = const.open_win_count - 1
+				const.cache[win_res.num].status = 0
+			end
+		end
+	end)
 end
 
 vim.api.nvim_create_user_command("Indicator", function(opts)
