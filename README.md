@@ -26,7 +26,7 @@ It also highlights the window you jump into, enhancing your navigation experienc
 * Install using your preferred plugin manager (e.g., `lazy.nvim` and `packer.nvim`).
 * Keymap examples are also provided. Feel free to modify them to suit your preferences.
 
-### [lazy.nvim](https://github.com/folke/lazy.nvim)
+#### [lazy.nvim](https://github.com/folke/lazy.nvim)
 
 ```lua
 {
@@ -44,7 +44,7 @@ It also highlights the window you jump into, enhancing your navigation experienc
 }
 ```
 
-### [packer.nvim](https://github.com/wbthomason/packer.nvim)
+#### [packer.nvim](https://github.com/wbthomason/packer.nvim)
 
 ```lua
 use {
@@ -65,16 +65,22 @@ use {
 
 ### Indicator Functions
 
-| Functions                                     | Description                                                                           |
-|-----------------------------------------------|---------------------------------------------------------------------------------------|
-| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number        |
-| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located   |
-| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into  |
-| `Indicator.indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into |
-| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime                     |
-| `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime                    |
+| Functions                                     | Description                                                                                  |
+|-----------------------------------------------|----------------------------------------------------------------------------------------------|
+| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number.              |
+| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located.         |
+| `Indicator.windowManagement`                  | Mimics inbuilt neovim window management system, only 'jump' and 'close' feature is avaliable.|
+| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into.        |
+| `Indicator.indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into.       |
+| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime.                           |
+| `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime.                          |
 
-
+### Window Management with Indication
+ Neovim's inbuilt window management system is repicated here with just 'jump' and 'close' feature.
+ set a keymap to trigger the function and then use key commands to do the following:
+  1. jump - ``number + "w"`` to jump to the desired window with the help of indication.
+  2. close - ``number + "q"`` to close the desrired window, ``number + "o"`` to keep the desired window and close the rest.
+ 
 ### Keymaps for Indicator Functions
 
 ```lua
