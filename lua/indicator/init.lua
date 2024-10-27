@@ -1,7 +1,7 @@
 local fn = require("indicator.utils.window_fn")
-local const = require("indicator/constants")
-local status = require("indicator/win_status")
 local ascii = require("indicator.ascii.digits")
+local status = require("indicator/win_status")
+local const = require("indicator/constants")
 
 local M = {}
 
@@ -200,7 +200,7 @@ M.window_highlight_event_deactivate = function()
 	const.window_notify = true
 end
 
-M.windowManagement = function(timer)
+M.triggerWindowManager = function(timer)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
@@ -230,7 +230,7 @@ M.windowManagement = function(timer)
 			command = cmd_str .. key
 		elseif string.match(key, "x") then
 			command = ""
-			local msg = "Indicator.nvim [WARNING] : 1st character should be a digit."
+			local msg = "Indicator.nvim [WARNING]: 1st character should be a digit."
 			vim.notify(msg, vim.log.levels.WARN)
 		else
 			command = ""
