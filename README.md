@@ -65,38 +65,25 @@ use {
 
 ### Indicator Functions
 
-| Functions                                     | Description                                                                                  |
-|-----------------------------------------------|----------------------------------------------------------------------------------------------|
-| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number.              |
-| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located.         |
-| `Indicator.windowManagement`                  | Mimics inbuilt neovim window management system, only 'jump' and 'close' feature is avaliable.|
-| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into.        |
-| `Indicator.indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into.       |
-| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime.                           |
-| `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime.                          |
+| Functions                                     | Description                                                                                   |
+|-----------------------------------------------|-----------------------------------------------------------------------------------------------|
+| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number.               |
+| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located.          |
+| `Indicator.triggerWindowManager`              | Mimics inbuilt neovim window management system, only 'jump' and 'close' feature is avaliable. |
+| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into.         |
+| `Indicator.indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into.        |
+| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime.                            |
+| `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime.                           |
 
 ### Window Management with Visual Indication
-Neovim's inbuilt window management system is replicated here with only the "jump" and "close" features.<br>
+Neovim's built-in window management system is replicated here with added visual indicators, focusing on only the 'jump' and 'close' features.<br>
 Set a keymap to trigger the function, and then use key commands to perform the following actions:
 
-   1. **Jump** - Use ``number + "w"`` to jump to the desired window with the help of indication.
-   2. **Close** - Use ``number + "q"`` to close the desired window, or ``number + "o"`` to keep the desired window and close the rest. 
+  1. **Jump** - Use ``number + "w"`` to jump to the desired window with the help of indication.
+  2. **Close** - Use ``number + "q"`` to close the desired window, or ``number + "o"`` to keep the desired window and close the rest. 
 
-### Keymaps for Indicator Functions
-
-```lua
-  vim.keymap.set("n", "<leader>bx", function()
-  	Indicator.indicateCurrent() -- takes in an integer arugment to extend the indicator display time
-  end, { silent = true })
-
-  vim.keymap.set("n", "<leader>bv", function()
-  	Indicator.indicateAll()
-  end, { silent = true })
-
-  vim.keymap.set("n", "<leader>iw", Indicator.windowManagement, {})
-  vim.keymap.set("n", "<leader>it", Indicator.indicator_event_activate, {})
-  vim.keymap.set("n", "<leader>ir", Indicator.indicator_event_deactivate, {})
-```
+### Preview
+![window_management](https://github.com/user-attachments/assets/74346f23-b05f-4bc0-9312-88f58e1f08f8)
 
 ## About Window Highlight Feature
 * Setting 'window_highlight_event = true' in setup function sets the hightlight feature ON by default.
@@ -122,6 +109,7 @@ Set a keymap to trigger the function, and then use key commands to perform the f
  vim.keymap.set("n", "<leader>iq", Indicator.window_highlight_event_activate, {})
  vim.keymap.set("n", "<leader>iw", Indicator.window_highlight_event_deactivate, {})
 ```
+
 ## Status Line Indication
 If you have [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) installed, window and tab count stats can be displayed on the status bar.
 
