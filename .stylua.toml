@@ -1,6 +1,8 @@
-indent_type = "Spaces"
-call_parentheses = "None"
+indent_type = "Tabs"
 indent_width = 8
+
+call_parentheses = "Always"
+# collapse_simple_statments = "Always"
 
 [sort_requires]
 enabled = true
