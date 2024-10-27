@@ -1,0 +1,7 @@
+indent_type = "Spaces"
+call_parentheses = "None"
+indent_width = 8
+
+[sort_requires]
+enabled = true
+
