@@ -59,12 +59,26 @@ CONTENTS                                                                        
 
      - This function indicates all the open windows in the current working tab.
      - It's done by displaying the window number at the top right corner of each window.
-     - the function takes in an argument called timer to extend or shorten the display time.
+     - The function takes in an argument called timer to extend or shorten the display time.
      - timer argument should be a positive integer, representing the duration in seconds.
      - timer field is optional if not provided, the display time defaults to |1500| seconds.
 
      Parameters:
       . {timer} (integer|nil) : to set the indicator window lifetime in |seconds|
+
+  ------------------------------------------------------------------------------------------------------
+
+    |triggerWindowManager|({null})
+
+		 - This function mimics the built-in Neovim window management system.
+		 - Only the 'jump' and 'close' features are available.
+     - Visually indicates the window |number| on top of each window in a tab.
+     - Use <*number* + |w|> to jump to the desired window.
+     - Use <*number* + |q|> to close the desired window .
+     - Use <*number* + |o|> to close all windows expect the one you want to be open.
+
+     Parameters:
+		  . {null} : not accepting any |parameters| as of now
 
 =========================================================================================================
 
