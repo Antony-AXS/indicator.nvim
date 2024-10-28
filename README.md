@@ -76,14 +76,30 @@ use {
 | `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime.                           |
 
 ### Window Management with Visual Indication
-Neovim's built-in window management system is replicated here with added visual indicators, focusing on only the 'jump' and 'close' features.<br>
-Set a keymap to trigger the function, and then use key commands to perform the following actions:
+Neovim's built-in window management system is replicated here with added visual indicators, focusing on only the *'jump'* and *'close'* features.<br>
+Set a keymap to trigger the function **triggerWindowManager**, and then use key commands to perform the following actions:
 
-  1. **Jump** - Use ``number + "w"`` to jump to the desired window with the help of indication.
-  2. **Close** - Use ``number + "q"`` to close the desired window, or ``number + "o"`` to keep the desired window and close the rest. 
+ * **Jump** : ``number + "w"`` to jump to the desired window with the help of indication.
+ * **Close** : ``number + "q"`` to close the desired window, or ``number + "o"`` to keep the desired window and close the rest. 
 
 ### Preview
 ![window_management](https://github.com/user-attachments/assets/74346f23-b05f-4bc0-9312-88f58e1f08f8)
+
+### Keymaps for Indicator Functions
+
+```lua
+  vim.keymap.set("n", "<leader>bx", function()
+  	Indicator.indicateCurrent() -- takes in an integer arugment to extend the indicator display time
+  end, { silent = true })
+
+  vim.keymap.set("n", "<leader>bv", function()
+  	Indicator.indicateAll()
+  end, { silent = true })
+  
+  vim.keymap.set("n", "<leader>iw", Indicator.triggerWindowManager, {})
+  vim.keymap.set("n", "<leader>it", Indicator.indicator_event_activate, {})
+  vim.keymap.set("n", "<leader>ir", Indicator.indicator_event_deactivate, {})
+```
 
 ## About Window Highlight Feature
 * Setting 'window_highlight_event = true' in setup function sets the hightlight feature ON by default.
