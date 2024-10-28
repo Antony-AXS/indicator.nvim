@@ -7,7 +7,7 @@ It also highlights the window you jump into, enhancing your navigation experienc
 
 ### Preview
 
-![r_inidcaotr](https://github.com/user-attachments/assets/cff899b1-3650-452f-85f6-c1d14d569e6c)
+![indicator](https://github.com/user-attachments/assets/cff899b1-3650-452f-85f6-c1d14d569e6c)
 
 ### Required
 
@@ -61,7 +61,6 @@ use {
   end
 }
 ```
-<br>
 
 ### Indicator Functions
 
@@ -75,16 +74,6 @@ use {
 | `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime.                            |
 | `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime.                           |
 
-### Window Management with Visual Indication
-Neovim's built-in window management system is replicated here with added visual indicators, focusing on only the *'jump'* and *'close'* features.<br>
-Set a keymap to trigger the function **triggerWindowManager**, and then use key commands to perform the following actions:
-
- * **Jump** : ``number + "w"`` to jump to the desired window with the help of indication.
- * **Close** : ``number + "q"`` to close the desired window, or ``number + "o"`` to keep the desired window and close the rest. 
-
-### Preview
-![window_management](https://github.com/user-attachments/assets/74346f23-b05f-4bc0-9312-88f58e1f08f8)
-
 ### Keymaps for Indicator Functions
 
 ```lua
@@ -96,10 +85,20 @@ Set a keymap to trigger the function **triggerWindowManager**, and then use key 
   	Indicator.indicateAll()
   end, { silent = true })
   
-  vim.keymap.set("n", "<leader>iw", Indicator.triggerWindowManager, {})
+  vim.keymap.set("n", "<leader>im", Indicator.triggerWindowManager, {})
   vim.keymap.set("n", "<leader>it", Indicator.indicator_event_activate, {})
   vim.keymap.set("n", "<leader>ir", Indicator.indicator_event_deactivate, {})
 ```
+
+## About Window Management with Visual Indication
+Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the *'jump'* and *'close'* features.<br>
+Set a keymap to trigger the function *triggerWindowManager*, and then use key commands to perform the following actions:
+
+ * **Jump** : ``number + "w"`` to jump to the desired window with the help of indication.
+ * **Close** : ``number + "q"`` to close the desired window, or ``number + "o"`` to keep the desired window and close the rest. 
+
+### Preview
+![window_management](https://github.com/user-attachments/assets/74346f23-b05f-4bc0-9312-88f58e1f08f8)
 
 ## About Window Highlight Feature
 * Setting 'window_highlight_event = true' in setup function sets the hightlight feature ON by default.
@@ -107,8 +106,7 @@ Set a keymap to trigger the function **triggerWindowManager**, and then use key 
 * You can use 'Indicator.window_highlight_event_activate' to turn it ON.
 
 ### Preview
-![wind](https://github.com/user-attachments/assets/f6a1a127-69a9-486e-8e2e-4e8f412c8c7a)
-
+![window_highlight](https://github.com/user-attachments/assets/f6a1a127-69a9-486e-8e2e-4e8f412c8c7a)
 
 ### Setup
 ```lua
@@ -139,7 +137,7 @@ If you have [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) install
   * **3**rd is the total window count across all the open tabs in the neovim instance.
 
 ### Preview
-![status_bar_3](https://github.com/user-attachments/assets/7caf6268-9e3b-48cf-bf27-28f3d485e88f)
+![status_bar_1](https://github.com/user-attachments/assets/7caf6268-9e3b-48cf-bf27-28f3d485e88f)
 ![status_bar_2](https://github.com/user-attachments/assets/af12c04f-e6f4-4313-bd7e-f5be55d05d18) <br><br>
 If only one tab is open, the tab stats won't appear, and the 3rd parameter for window stats will also be hidden.<br>
 They will only be displayed if more than one tab is open.<br>
@@ -167,7 +165,7 @@ The indicator.nvim help doc explains the features and functionality of the plugi
 Use the commands below to jump to each specific sections of the document.
 | Doc Commands                   | Description                                            |
 |--------------------------------|--------------------------------------------------------|
-|`:help indicator.nvim`          | to jump to the start of the document                   | 
+|`:help indicator.nvim`          | to jump to the start of the document                   |
 |`:help indicator_commands`      | to jump to the commands section of the document        |
 |`:help indicator_functions`     | to jump to the functions section of the document       |
 |`:help indicator_configuration` | to jump to the configuration section of the document   |
