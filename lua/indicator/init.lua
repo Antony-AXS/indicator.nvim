@@ -210,10 +210,11 @@ M.triggerWindowManager = function(timer)
 
 	vim.schedule(function()
 		local key_tbl = {}
+		local valid_set = const.win_mngr_valid_chrs
 		for _ = 1, 2 do
 			local char = vim.fn.nr2char(vim.fn.getchar())
 			local not_digit = string.match(char, "%D")
-			local valid_char = const.win_mngr_valid_chrs[char]
+			local valid_char = valid_set[char]
 			if _ == 1 and not_digit and not valid_char then
 				table.insert(key_tbl, "x")
 				break
@@ -241,7 +242,9 @@ M.triggerWindowManager = function(timer)
 			command = cmd_str .. string.upper(key)
 		elseif string.match(key, "%dl") then
 			command = cmd_str .. string.upper(key)
-		elseif const.win_mngr_valid_chrs[key] then
+		elseif valid_set[key] and valid_set[key] then
+			command = cmd_str .. string.upper(key)
+		elseif valid_set[key] and not valid_set[key] then
 			command = cmd_str .. key
 		elseif string.match(key, "x") then
 			command = ""
