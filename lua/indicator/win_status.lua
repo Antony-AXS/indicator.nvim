@@ -75,10 +75,12 @@ end
 
 local function validateLualineInstalled()
 	if vim.fn.executable("git") == 0 then
+		local msg_one = "Indicator.nvim [ERROR]: GIT not found (required for lualine validation),"
+		local msg_two = "please install GIT or disable window-count-stats feature"
 		return {
 			val = false,
 			type = "ERROR",
-			message = "Indicator.nvim [ERROR]: GIT not found (required for lualine validation),\nplease install GIT or disable window-count-stats feature",
+			message = msg_one .. "\n" .. msg_two,
 		}
 	end
 	local runtime_paths = vim.api.nvim_list_runtime_paths()

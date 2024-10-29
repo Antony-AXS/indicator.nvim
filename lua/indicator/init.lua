@@ -1,7 +1,7 @@
-local fn = require("indicator.utils.window_fn")
 local ascii = require("indicator.ascii.digits")
-local status = require("indicator/win_status")
 local const = require("indicator/constants")
+local fn = require("indicator.utils.window_fn")
+local status = require("indicator/win_status")
 
 local M = {}
 

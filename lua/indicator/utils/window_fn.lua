@@ -133,7 +133,6 @@ M.create_float_window_V2 = function(content, options)
 		win_id = vim.api.nvim_open_win(bufnr, options.foucs, opts)
 		vim.api.nvim_set_option_value("winhighlight", "Normal:" .. highlight_name, { win = win_id })
 	end
-	-- vim.api.nvim_win_set_option(win.border.win_id, "winhl", "Normal:HarpoonBorder")
 
 	local if_modifiable = (options and options.modifiable) or false
 	local if_cursorline = (options and options.cursorline) or false
