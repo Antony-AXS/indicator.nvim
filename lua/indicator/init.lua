@@ -228,6 +228,14 @@ M.triggerWindowManager = function(timer)
 			command = cmd_str .. key
 		elseif string.match(key, "%do") then
 			command = cmd_str .. key
+		elseif string.match(key, "%dh") then
+			command = cmd_str .. string.upper(key)
+		elseif string.match(key, "%dj") then
+			command = cmd_str .. string.upper(key)
+		elseif string.match(key, "%dk") then
+			command = cmd_str .. string.upper(key)
+		elseif string.match(key, "%dl") then
+			command = cmd_str .. string.upper(key)
 		elseif string.match(key, "x") then
 			command = ""
 			local msg = "Indicator.nvim [WARNING]: 1st character should be a digit."
@@ -248,6 +256,7 @@ M.triggerWindowManager = function(timer)
 				const.cache[win_res.num].status = 0
 			end
 		end
+		const.disp_ind_win_meta = {}
 	end)
 end
 
