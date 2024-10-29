@@ -212,8 +212,13 @@ M.triggerWindowManager = function(timer)
 		local key_tbl = {}
 		for _ = 1, 2 do
 			local char = vim.fn.nr2char(vim.fn.getchar())
-			if _ == 1 and string.match(char, "%D") then
+			local not_digit = string.match(char, "%D")
+			local valid_char = const.win_mngr_valid_chrs[char]
+			if _ == 1 and not_digit and not valid_char then
 				table.insert(key_tbl, "x")
+				break
+			elseif _ == 1 and not_digit and valid_char then
+				table.insert(key_tbl, char)
 				break
 			end
 			table.insert(key_tbl, char)
@@ -236,6 +241,10 @@ M.triggerWindowManager = function(timer)
 			command = cmd_str .. string.upper(key)
 		elseif string.match(key, "%dl") then
 			command = cmd_str .. string.upper(key)
+		elseif const.win_mngr_valid_chrs[key][1] then
+			command = cmd_str .. string.upper(key)
+		elseif not const.win_mngr_valid_chrs[key][1] then
+			command = cmd_str .. key
 		elseif string.match(key, "x") then
 			command = ""
 			local msg = "Indicator.nvim [WARNING]: 1st character should be a digit."
