@@ -8,4 +8,13 @@ return {
 	indicator_notify = false,
 	disp_ind_win_meta = {},
 	win_hilght_acmd_id = nil,
+	win_mngr_valid_chrs = {
+		h = { true },
+		j = { true },
+		k = { true },
+		l = { true },
+		o = { false },
+		q = { false },
+		w = { false },
+	},
 }
