@@ -1,7 +1,7 @@
 local ascii = require("indicator.ascii.digits")
 local const = require("indicator/constants")
-local fn = require("indicator.utils.window_fn")
 local status = require("indicator/win_status")
+local win_fn = require("indicator.utils.window_fn")
 
 local M = {}
 
@@ -75,7 +75,7 @@ local indicator = function(timer, win_id, bloat, disp_win_cls)
 		height = 1
 		width = 3
 	end
-	local win_res = fn.create_float_window_V2(content, {
+	local win_res = win_fn.create_float_window_V2(content, {
 		focus = false, -- mandatory field
 		highlight = highlight_color,
 		border = nil,
@@ -241,13 +241,11 @@ M.triggerWindowManager = function(timer)
 			command = cmd_str .. string.upper(key)
 		elseif string.match(key, "%dl") then
 			command = cmd_str .. string.upper(key)
-		elseif const.win_mngr_valid_chrs[key][1] then
-			command = cmd_str .. string.upper(key)
-		elseif not const.win_mngr_valid_chrs[key][1] then
+		elseif const.win_mngr_valid_chrs[key] then
 			command = cmd_str .. key
 		elseif string.match(key, "x") then
 			command = ""
-			local msg = "Indicator.nvim [WARNING]: 1st character should be a digit."
+			local msg = "Indicator.nvim [WARNING]: Invalid Character Entered."
 			vim.notify(msg, vim.log.levels.WARN)
 		else
 			command = ""
