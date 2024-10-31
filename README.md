@@ -90,12 +90,48 @@ use {
   vim.keymap.set("n", "<leader>ir", Indicator.indicator_event_deactivate, {})
 ```
 
-## About Window Management with Visual Indication
-Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the *'jump'* and *'close'* features.<br>
+## Window Management with Visual Indication
+Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the *'jump'*, *'close'* and *'shift'* features.<br>
 Set a keymap to trigger the function *triggerWindowManager*, and then use key commands to perform the following actions:
 
- * **Jump** : ``number + "w"`` to jump to the desired window with the help of indication.
- * **Close** : ``number + "q"`` to close the desired window, or ``number + "o"`` to keep the desired window and close the rest. 
+<table border="1">
+	<tr>
+		<th colspan="1">Feature</th>
+		<th>Key(s)</th>
+		<th>Description</th>
+	</tr>
+	<tr>
+		<td rowspan="4"><b>Shift</b></td>
+		<td>number + "h"</td>
+		<td>to shit the window to left.</td>
+	</tr>
+	<tr>
+		<td>number + "j"</td>
+		<td>to shit the window to bottom.</td>
+	</tr>
+	<tr>
+		<td>number + "k"</td>
+		<td>to shit the window to up.</td>
+	</tr>
+	<tr>
+		<td>number + "l"</td>
+		<td>to shit the window to right.</td>
+	</tr>
+	<tr>
+		<td rowspan="2"><b>Close</b></td>
+		<td>number + "o"</td>
+		<td>to keep the desired window and close the rest.</td>
+	</tr>
+	<tr>
+		<td>number + "q"</td>
+		<td>to close the desired window only.</td>
+	</tr>
+	<tr>
+		<td rowspan="1"><b>Jump</b></td>
+		<td>number + "o"</td>
+		<td>to jump to the desired window with the help of indication.</td>
+	</tr>
+</table>
 
 ### Preview
 ![window_management](https://github.com/user-attachments/assets/74346f23-b05f-4bc0-9312-88f58e1f08f8)
