@@ -228,23 +228,13 @@ M.triggerWindowManager = function(timer)
 
 		local command
 		local cmd_str = "wincmd" .. " "
-		if string.match(key, "%dw") then
+		if string.match(key, "^%d[oqw]$") then
 			command = cmd_str .. key
-		elseif string.match(key, "%dq") then
-			command = cmd_str .. key
-		elseif string.match(key, "%do") then
-			command = cmd_str .. key
-		elseif string.match(key, "%dh") then
+		elseif string.match(key, "^%d[h|H|j|J|k|K|l|L]$") then
 			command = cmd_str .. string.upper(key)
-		elseif string.match(key, "%dj") then
+		elseif valid_set[key] and valid_set[key][1] then
 			command = cmd_str .. string.upper(key)
-		elseif string.match(key, "%dk") then
-			command = cmd_str .. string.upper(key)
-		elseif string.match(key, "%dl") then
-			command = cmd_str .. string.upper(key)
-		elseif valid_set[key] and valid_set[key] then
-			command = cmd_str .. string.upper(key)
-		elseif valid_set[key] and not valid_set[key] then
+		elseif valid_set[key] and not valid_set[key][1] then
 			command = cmd_str .. key
 		elseif string.match(key, "x") then
 			command = ""
@@ -253,8 +243,8 @@ M.triggerWindowManager = function(timer)
 		else
 			command = ""
 			local msg_1 = "Indicator.nvim [WARNING]: Invalid window-management command,"
-			local msg_2 = "(w,o,q are considered valid)."
-			vim.notify(msg_1 .. " " .. msg_2, vim.log.levels.WARN)
+			local msg_2 = "Only 'h', 'j', 'k', 'l', 'w', 'o', 'q' are considered valid."
+			vim.notify(msg_1 .. "\n" .. msg_2, vim.log.levels.WARN)
 		end
 
 		vim.cmd(command)
