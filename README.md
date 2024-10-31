@@ -103,19 +103,19 @@ Set a keymap to trigger the function *triggerWindowManager*, and then use key co
 	<tr>
 		<td rowspan="4"><b>Shift</b></td>
 		<td><i>number</i> + <b>h</b></td>
-		<td>to shit the window to left.</td>
+		<td>to shift the window to the left.</td>
 	</tr>
 	<tr>
 		<td><i>number</i> + <b>j</b></td>
-		<td>to shit the window to bottom.</td>
+		<td>to shift the window to the bottom.</td>
 	</tr>
 	<tr>
 		<td><i>number</i> + <b>k</b></td>
-		<td>to shit the window to up.</td>
+		<td>to shift the window to the top.</td>
 	</tr>
 	<tr>
 		<td><i>number</i> + <b>l</b></td>
-		<td>to shit the window to right.</td>
+		<td>to shift the window to the right.</td>
 	</tr>
 	<tr>
 		<td rowspan="2"><b>Close</b></td>
