@@ -9,9 +9,13 @@ return {
 	disp_ind_win_meta = {},
 	win_hilght_acmd_id = nil,
 	win_mngr_valid_chrs = {
+		H = { false },
 		h = { true },
 		j = { true },
+		J = { false },
+		K = { false },
 		k = { true },
+		L = { false },
 		l = { true },
 		o = { false },
 		q = { false },
