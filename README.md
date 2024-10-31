@@ -94,44 +94,48 @@ use {
 Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the *'jump'*, *'close'* and *'shift'* features.<br>
 Set a keymap to trigger the function *triggerWindowManager*, and then use key commands to perform the following actions:
 
-<table border="1">
+<table>
 	<tr>
-		<th colspan="1">Feature</th>
-		<th>Key(s)</th>
+		<th colspan="1">Action</th>
+		<th>Keys</th>
 		<th>Description</th>
 	</tr>
 	<tr>
 		<td rowspan="4"><b>Shift</b></td>
-		<td>number + "h"</td>
+		<td><i>number</i> + <b>h</b></td>
 		<td>to shit the window to left.</td>
 	</tr>
 	<tr>
-		<td>number + "j"</td>
+		<td><i>number</i> + <b>j</b></td>
 		<td>to shit the window to bottom.</td>
 	</tr>
 	<tr>
-		<td>number + "k"</td>
+		<td><i>number</i> + <b>k</b></td>
 		<td>to shit the window to up.</td>
 	</tr>
 	<tr>
-		<td>number + "l"</td>
+		<td><i>number</i> + <b>l</b></td>
 		<td>to shit the window to right.</td>
 	</tr>
 	<tr>
 		<td rowspan="2"><b>Close</b></td>
-		<td>number + "o"</td>
+		<td><i>number</i> + <b>o</b></td>
 		<td>to keep the desired window and close the rest.</td>
 	</tr>
 	<tr>
-		<td>number + "q"</td>
+		<td><i>number</i> + <b>q</b></td>
 		<td>to close the desired window only.</td>
 	</tr>
 	<tr>
 		<td rowspan="1"><b>Jump</b></td>
-		<td>number + "o"</td>
+		<td><i>number</i> + <b>w</b></td>
 		<td>to jump to the desired window with the help of indication.</td>
 	</tr>
 </table>
+
+*Here, "number" in the table refers to the window number displayed on the screen.*
+
+**Note:** If a window number is not provided before pressing the valid keys, the following actions will be executed in the current window where the cursor is located.
 
 ### Preview
 ![window_management](https://github.com/user-attachments/assets/74346f23-b05f-4bc0-9312-88f58e1f08f8)
