@@ -23,5 +23,9 @@ return {
 		["w"] = { false },
 		[">"] = { false },
 		["<"] = { false },
+		["="] = { false },
+		["+"] = { false },
+		["-"] = { false },
+		["_"] = { false },
 	},
 }
