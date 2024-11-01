@@ -209,40 +209,47 @@ M.triggerWindowManager = function(timer)
 	end
 
 	vim.schedule(function()
-		local key_tbl = {}
+		local key
+		local tbl = {}
 		local valid_set = const.win_mngr_valid_chrs
-		for _ = 1, 2 do
+		local digit_count = 0
+		while true do
 			local char = vim.fn.nr2char(vim.fn.getchar())
 			local not_digit = string.match(char, "%D")
 			local valid_char = valid_set[char]
-			if _ == 1 and not_digit and not valid_char then
-				table.insert(key_tbl, "x")
+			if not_digit and not valid_char then
+				table.insert(tbl, "x")
 				break
-			elseif _ == 1 and not_digit and valid_char then
-				table.insert(key_tbl, char)
+			elseif not_digit and valid_char then
+				key = char
+				break
+			elseif digit_count < 2 then
+				table.insert(tbl, char)
+				digit_count = digit_count + 1
+			else
 				break
 			end
-			table.insert(key_tbl, char)
 		end
-		local key = table.concat(key_tbl)
+		local digit = table.concat(tbl)
 
 		local command
 		local cmd_str = "wincmd" .. " "
-		if string.match(key, "^%d[oqw]$") then
-			command = cmd_str .. key
-		elseif string.match(key, "^%d[h|H|j|J|k|K|l|L]$") then
-			command = cmd_str .. string.upper(key)
+
+		if valid_set[key] and not valid_set[key][1] then
+			command = cmd_str .. digit .. key
 		elseif valid_set[key] and valid_set[key][1] then
-			command = cmd_str .. string.upper(key)
-		elseif valid_set[key] and not valid_set[key][1] then
-			command = cmd_str .. key
-		elseif string.match(key, "x") then
+			command = cmd_str .. digit .. string.upper(key)
+		elseif string.match(digit, "^%d%d$") then
+			command = ""
+			local msg = "Indicator.nvim: [WARNING] Digit limit exceeded."
+			vim.notify(msg, vim.log.levels.WARN)
+		elseif string.match(digit, "^x$") then
 			command = ""
 			local msg = "Indicator.nvim [WARNING]: Invalid Character Entered."
 			vim.notify(msg, vim.log.levels.WARN)
 		else
 			command = ""
-			local msg_1 = "Indicator.nvim [WARNING]: Invalid window-management command,"
+			local msg_1 = "Indicator.nvim [WARNING]: Invalid window management command,"
 			local msg_2 = "Only 'h', 'j', 'k', 'l', 'w', 'o', 'q' are considered valid."
 			vim.notify(msg_1 .. "\n" .. msg_2, vim.log.levels.WARN)
 		end
