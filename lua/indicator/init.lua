@@ -217,15 +217,16 @@ M.triggerWindowManager = function(timer)
 			local char = vim.fn.nr2char(vim.fn.getchar())
 			local not_digit = string.match(char, "%D")
 			local valid_char = valid_set[char]
-			if not_digit and not valid_char then
-				table.insert(tbl, "x")
-				break
+
+			if digit_count < const.wmgr_num_lmt then
+				digit_count = digit_count + 1
+				table.insert(tbl, char)
 			elseif not_digit and valid_char then
 				key = char
 				break
-			elseif digit_count < 2 then
-				table.insert(tbl, char)
-				digit_count = digit_count + 1
+			elseif not_digit and not valid_char then
+				table.insert(tbl, "x")
+				break
 			else
 				break
 			end
@@ -241,7 +242,7 @@ M.triggerWindowManager = function(timer)
 			command = cmd_str .. digit .. string.upper(key)
 		elseif string.match(digit, "^%d%d$") then
 			command = ""
-			local msg = "Indicator.nvim: [WARNING] Digit limit exceeded."
+			local msg = "Indicator.nvim [WARNING]: Digit limit exceeded."
 			vim.notify(msg, vim.log.levels.WARN)
 		elseif string.match(digit, "^x$") then
 			command = ""
