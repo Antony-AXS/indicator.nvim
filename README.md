@@ -91,7 +91,7 @@ use {
 ```
 
 ## Window Management with Visual Indication
-Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the *'jump'*, *'close'* and *'shift'* features.<br>
+Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the window *'jumping'*, *'shifting'* and *'closing'* features.<br>
 Set a keymap to trigger the function *triggerWindowManager*, and then use key commands to perform the following actions:
 
 <table>
@@ -129,7 +129,7 @@ Set a keymap to trigger the function *triggerWindowManager*, and then use key co
 	<tr>
 		<td rowspan="1"><b>Jump</b></td>
 		<td><i>number</i> + <b>w</b></td>
-		<td>to jump to the desired window with the help of indication.</td>
+		<td>to jump to the desired window.</td>
 	</tr>
 </table>
 
