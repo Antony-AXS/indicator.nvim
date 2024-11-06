@@ -75,6 +75,7 @@ local indicator = function(timer, win_id, bloat, disp_win_cls)
 		height = 1
 		width = 3
 	end
+
 	local win_res = win_fn.create_float_window_V2(content, {
 		focus = false, -- mandatory field
 		highlight = highlight_color,
@@ -218,15 +219,15 @@ M.triggerWindowManager = function(timer)
 			local not_digit = string.match(char, "%D")
 			local valid_char = valid_set[char]
 
-			if digit_count < const.wmgr_num_lmt then
-				digit_count = digit_count + 1
-				table.insert(tbl, char)
+			if not_digit and not valid_char then
+				table.insert(tbl, "x")
+				break
 			elseif not_digit and valid_char then
 				key = char
 				break
-			elseif not_digit and not valid_char then
-				table.insert(tbl, "x")
-				break
+			elseif digit_count < const.wmgr_num_lmt then
+				table.insert(tbl, char)
+				digit_count = digit_count + 1
 			else
 				break
 			end
