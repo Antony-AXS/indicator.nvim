@@ -77,8 +77,8 @@ CONTENTS                                                                        
 
     |triggerWindowManager|({null})
 
-		 - This function mimics the built-in Neovim window management system.
-		 - Only the 'jump' and 'close' features are available.
+     - This function mimics the built-in Neovim window management system.
+     - Only the 'jump' and 'close' features are available.
      - Visually indicates the window |number| on top of each window in a tab.
      - Use <*number* + |w|> to jump to the desired window.
      - Use <*number* + |q|> to close the desired window .
