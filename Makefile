@@ -1,6 +1,6 @@
 fmt:
 	echo "===> Formatting"
-	stylua lua/ --config-path=.stylua.toml
+	stylua lua/ --config-path=stylua.toml
 
 lint:
 	echo "===> Linting"
