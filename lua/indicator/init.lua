@@ -5,6 +5,10 @@ local win_fn = require("indicator.utils.window_fn")
 
 local M = {}
 
+---@param timer integer|nil
+---@param win_id integer|nil
+---@param bloat boolean
+---@param disp_win_cls boolean
 local indicator = function(timer, win_id, bloat, disp_win_cls)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 
@@ -136,10 +140,12 @@ local window_highlight = function()
 	end, const.window_timer)
 end
 
+---@param timer integer|nil
 M.indicateCurrent = function(timer)
 	indicator(timer, nil, true, false)
 end
 
+---@param timer integer|nil
 M.indicateAll = function(timer)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
@@ -155,7 +161,7 @@ M.indicator_event_activate = function()
 			desc = "Trigger always when entering a new Buffer",
 			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
 			callback = function()
-				indicator(500, nil, true)
+				indicator(500, nil, true, false)
 			end,
 		})
 		if const.indicator_notify then
@@ -201,6 +207,7 @@ M.window_highlight_event_deactivate = function()
 	const.window_notify = true
 end
 
+---@param timer integer|nil
 M.triggerWindowManager = function(timer)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
@@ -269,6 +276,7 @@ M.triggerWindowManager = function(timer)
 	end)
 end
 
+---@param opts table {args: ArgsEnum} -- args must be "ON" or "OFF"
 vim.api.nvim_create_user_command("Indicator", function(opts)
 	if opts.args == "ON" then
 		M.indicator_event_activate()
@@ -280,6 +288,7 @@ vim.api.nvim_create_user_command("Indicator", function(opts)
 	end
 end, { nargs = "?" })
 
+---@param opts table {args: ArgsEnum} -- args must be "ON" or "OFF"
 vim.api.nvim_create_user_command("IndicatorWinHl", function(opts)
 	if opts.args == "ON" then
 		M.indicator_event_activate()
@@ -291,6 +300,7 @@ vim.api.nvim_create_user_command("IndicatorWinHl", function(opts)
 	end
 end, { nargs = "?" })
 
+---@param config table
 M.setup = function(config)
 	if config.indicator_event then
 		M.indicator_event_activate()

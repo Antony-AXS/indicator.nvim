@@ -14,6 +14,9 @@ local lualineSectTbl = {
 	z = "lualine_z",
 }
 
+---@param position integer|nil
+---@param color string|nil
+---@param tbl table
 local tab_count = function(position, color, tbl)
 	local component = {
 		function()
@@ -37,6 +40,9 @@ local tab_count = function(position, color, tbl)
 	table.insert(tbl, position or 2, component)
 end
 
+---@param position integer|nil
+---@param color string|nil
+---@param tbl table
 local window_count = function(position, color, tbl)
 	local component = {
 		function()
@@ -104,6 +110,7 @@ local function validateLualineInstalled()
 	}
 end
 
+---@param opts table
 M.setTabAndWindowStatus = function(opts)
 	local retVal = validateLualineInstalled()
 	if not retVal.val then
@@ -113,7 +120,7 @@ M.setTabAndWindowStatus = function(opts)
 	local tab_config
 	local window_config
 
-	if next(opts) and opts.tab and opts.tab.activate then
+	if opts and opts.tab and opts.tab.activate then
 		if opts.tab.position and opts.tab.position.section then
 			tab_config = lualineSectTbl[opts.tab.position.section]
 		else
@@ -133,7 +140,7 @@ M.setTabAndWindowStatus = function(opts)
 		tab_count(tab_position, color, for_tab)
 	end
 
-	if next(opts) and opts.window and opts.window.activate then
+	if opts and opts.window and opts.window.activate then
 		if opts.window.position and opts.window.position.section then
 			window_config = lualineSectTbl[opts.window.position.section]
 		else
