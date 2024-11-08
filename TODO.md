@@ -1,13 +1,13 @@
 # ✅ TODO
 
-- [x] status line indication (window and tab stats)
+- [x] Status Line Indicators for Window and Tab Statistics
 
-- [x] indications for window management opeations
+- [x] Indications for Window Management Operations
 
-- [ ] re-indication after shiftig window operations
+- [ ] Re-indication After Window Shifting Operations
 
-- [ ] static cursor state indication on current window
+- [ ] Static Cursor State Indication in Current Window
 
-- [ ] code optimization for indicator APIs
+- [ ] Code Improvements for Window Creation Functions
 
-- [ ] code optimization for create window API
+- [ ] Code Optimization for Indicator APIs
