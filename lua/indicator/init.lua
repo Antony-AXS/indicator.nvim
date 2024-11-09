@@ -207,13 +207,12 @@ M.window_highlight_event_deactivate = function()
 	const.window_notify = true
 end
 
----@param timer integer|nil
-M.triggerWindowManager = function(timer)
+M.triggerWindowManager = function()
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
 	for _, win_id in ipairs(window_ids) do
-		indicator(timer, win_id, true, true)
+		indicator(nil, win_id, true, true)
 	end
 
 	vim.schedule(function()
@@ -276,7 +275,11 @@ M.triggerWindowManager = function(timer)
 	end)
 end
 
----@param opts table {args: ArgsEnum} -- args must be "ON" or "OFF"
+---@alias ModeEnum "ON" | "OFF"
+---@class Table
+---@field args ModeEnum
+
+---@param opts Table
 vim.api.nvim_create_user_command("Indicator", function(opts)
 	if opts.args == "ON" then
 		M.indicator_event_activate()
@@ -288,7 +291,7 @@ vim.api.nvim_create_user_command("Indicator", function(opts)
 	end
 end, { nargs = "?" })
 
----@param opts table {args: ArgsEnum} -- args must be "ON" or "OFF"
+---@param opts Table
 vim.api.nvim_create_user_command("IndicatorWinHl", function(opts)
 	if opts.args == "ON" then
 		M.indicator_event_activate()
