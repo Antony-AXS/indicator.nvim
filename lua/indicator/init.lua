@@ -5,8 +5,8 @@ local win_fn = require("indicator.utils.window_fn")
 
 local M = {}
 
----@param timer integer|nil
----@param win_id integer|nil
+---@param timer number|nil
+---@param win_id number|nil
 ---@param bloat boolean
 ---@param disp_win_cls boolean
 local indicator = function(timer, win_id, bloat, disp_win_cls)
@@ -140,12 +140,12 @@ local window_highlight = function()
 	end, const.window_timer)
 end
 
----@param timer integer|nil
+---@param timer number|nil
 M.indicateCurrent = function(timer)
 	indicator(timer, nil, true, false)
 end
 
----@param timer integer|nil
+---@param timer number|nil
 M.indicateAll = function(timer)
 	local current_tabpage = vim.api.nvim_get_current_tabpage()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
