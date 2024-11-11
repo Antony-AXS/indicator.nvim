@@ -107,4 +107,4 @@ CONTENTS                                                                        
               }
 <
 ---------------------------------------------------------------------------------------------------------
-vim:tw=80:ts=2:ft=help:norl:syntax=help:autoindent:list:listchars=tab:>-,trail:-,eol:$:
+vim:tw=80:ts=2:ft=help:norl:syntax=help:autoindent:
