@@ -140,6 +140,21 @@ local window_highlight = function()
 	end, const.window_timer)
 end
 
+-- text doc specific alterations
+vim.api.nvim_create_autocmd({ "BufRead", "BufEnter" }, {
+	pattern = vim.fn.getcwd() .. "/doc" .. "/indicator.nvim.txt",
+	callback = function()
+		vim.opt_local.list = true
+		vim.opt_local.listchars = { tab = ">-", trail = "-" }
+
+		-- vim.api.nvim_set_hl(0, "MyIndiCustomColor", { fg = "#45f963", bg = "#ff0000", bold = true })
+		-- vim.fn.matchadd("MyIndiCustomColor", "License")
+
+		-- vim.cmd([[syntax match MyIndiCustomColor "https://github.com/Antony-AXS/indicator.nvim"]])
+		-- vim.cmd([[highlight link MyIndiCustomColor "License"]])
+	end,
+})
+
 ---@param timer number|nil
 M.indicateCurrent = function(timer)
 	indicator(timer, nil, true, false)
