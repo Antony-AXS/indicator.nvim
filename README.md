@@ -62,19 +62,19 @@ use {
 }
 ```
 
-### Indicator Functions
+### Indicator API
 
-| Functions                                     | Description                                                                                   |
-|-----------------------------------------------|-----------------------------------------------------------------------------------------------|
-| `Indicator.indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number.               |
-| `Indicator.indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located.          |
-| `Indicator.triggerWindowManager`              | Mimics inbuilt neovim window management system, only 'jump' and 'close' feature is avaliable. |
-| `Indicator.indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into.         |
-| `Indicator.indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into.        |
-| `Indicator.window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime.                            |
-| `Indicator.window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime.                           |
+| Functions                           | Description                                                                                   |
+|-------------------------------------|-----------------------------------------------------------------------------------------------|
+| `indicateAll`                       | To Indicate All the Opened Windows in a tab once with their perspective number.               |
+| `indicateCurrent`                   | To Indicate the Current Window number in which the cursor is at that moment Located.          |
+| `triggerWindowManager`              | Mimics inbuilt neovim window management system, only 'jump' and 'close' feature is avaliable. |
+| `indicator_event_activate`          | Triggers an event listener to inidcate the window number of the window you jump into.         |
+| `indicator_event_deactivate`        | Disables the event listener to inidcate the window number of the window you jump into.        |
+| `window_highlight_event_activate`   | Triggers an event to Highlight the window you jump into everytime.                            |
+| `window_highlight_event_deactivate` | Disables the event to Highlight the window you jump into everytime.                           |
 
-### Keymaps for Indicator Functions
+### Keymaps for Indicator API
 
 ```lua
   vim.keymap.set("n", "<leader>bx", function()
@@ -118,13 +118,17 @@ Set a keymap to trigger the function *triggerWindowManager*, and then use key co
 		<td>to shift the window to the right.</td>
 	</tr>
 	<tr>
-		<td rowspan="2"><b>Close</b></td>
+		<td rowspan="3"><b>Close</b></td>
+		<td><i>number</i> + <b>c</b></td>
+		<td>to close the desired window only.</td>
+	</tr>
+	<tr>
 		<td><i>number</i> + <b>o</b></td>
 		<td>to keep the desired window and close the rest.</td>
 	</tr>
 	<tr>
 		<td><i>number</i> + <b>q</b></td>
-		<td>to close the desired window only.</td>
+		<td>to quit the desired window only.</td>
 	</tr>
 	<tr>
 		<td rowspan="1"><b>Jump</b></td>
