@@ -9,7 +9,7 @@ local M = {}
 ---@param win_id number|nil
 ---@param bloat boolean
 ---@param disp_win_cls boolean
-local indicator = function(timer, win_id, bloat, disp_win_cls)
+local indicator = function(timer, win_id, bloat, disp_win_cls, win_num)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 
 	if not vim.api.nvim_win_is_valid(curr_win_id) then
@@ -17,7 +17,7 @@ local indicator = function(timer, win_id, bloat, disp_win_cls)
 	end
 
 	local row, col = unpack(vim.api.nvim_win_get_position(curr_win_id))
-	local number = tostring(vim.api.nvim_win_get_number(win_id or 0))
+	local number = tostring(win_num or vim.api.nvim_win_get_number(win_id or 0))
 	local curr_win_config = vim.api.nvim_win_get_config(curr_win_id)
 	local _width = vim.api.nvim_win_get_width(curr_win_id)
 	local num = tostring(number)
@@ -100,6 +100,7 @@ local indicator = function(timer, win_id, bloat, disp_win_cls)
 	if win_res ~= nil and win_res.win_id ~= nil then
 		const.open_win_count = const.open_win_count + 1
 		const.cache[num].win_id = win_res.win_id
+		const.cache[num].par_id = curr_win_id
 		const.cache[num].status = 1
 	end
 
@@ -277,7 +278,18 @@ M.triggerWindowManager = function()
 			vim.notify(msg_1 .. "\n" .. msg_2, vim.log.levels.WARN)
 		end
 
-		vim.cmd(command)
+		local success, errorMessage = pcall(function()
+			vim.api.nvim_exec2(command, { output = true })
+		end)
+
+		local re_ind_flg
+
+		if success then
+			re_ind_flg = true
+		else
+			re_ind_flg = false
+			vim.notify(tostring(errorMessage), vim.log.levels.WARN)
+		end
 
 		for _, win_res in ipairs(const.disp_ind_win_meta) do
 			if vim.api.nvim_win_is_valid(win_res.win_id) then
@@ -286,6 +298,25 @@ M.triggerWindowManager = function()
 				const.cache[win_res.num].status = 0
 			end
 		end
+
+		if key and re_ind_flg and string.match(key, "[bhjklrt]") then
+			local all_win_meta = const.cache
+			for i = 1, #vim.api.nvim_tabpage_list_wins(0) do
+				local win_meta = all_win_meta[tostring(i)]
+				if win_meta then
+					local win_id = win_meta.par_id
+					indicator(1000, win_id, true, false, i)
+				end
+			end
+
+			-- while const.filp_switch do
+			-- 	local timer = vim.loop.new_timer()
+			-- 	timer:start(5000, 0, function()
+			-- 		print("This will not run if the timer is stopped.")
+			-- 	end)
+			-- end
+		end
+
 		const.disp_ind_win_meta = {}
 	end)
 end
