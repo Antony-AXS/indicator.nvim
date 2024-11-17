@@ -91,7 +91,7 @@ use {
 ```
 
 ## Window Management with Visual Indication
-Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the window *'jumping'*, *'shifting'* and *'closing'* features.<br>
+Neovim's in-built window management system is replicated here with added visual indicators, focusing on only the window *'jumping'*, *'shifting'*, *'rotating'* and *'closing'* features.<br>
 Set a keymap to trigger the function *triggerWindowManager*, and then use key commands to perform the following actions:
 
 <table>
@@ -102,19 +102,19 @@ Set a keymap to trigger the function *triggerWindowManager*, and then use key co
 	</tr>
 	<tr>
 		<td rowspan="4"><b>Shift</b></td>
-		<td><i>number</i> + <b>h</b></td>
+		<td><i>number</i> + <b>H</b></td>
 		<td>to shift the window to the left.</td>
 	</tr>
 	<tr>
-		<td><i>number</i> + <b>j</b></td>
+		<td><i>number</i> + <b>J</b></td>
 		<td>to shift the window to the bottom.</td>
 	</tr>
 	<tr>
-		<td><i>number</i> + <b>k</b></td>
+		<td><i>number</i> + <b>K</b></td>
 		<td>to shift the window to the top.</td>
 	</tr>
 	<tr>
-		<td><i>number</i> + <b>l</b></td>
+		<td><i>number</i> + <b>L</b></td>
 		<td>to shift the window to the right.</td>
 	</tr>
 	<tr>
@@ -129,6 +129,15 @@ Set a keymap to trigger the function *triggerWindowManager*, and then use key co
 	<tr>
 		<td><i>number</i> + <b>q</b></td>
 		<td>to quit the desired window only.</td>
+	</tr>
+	<tr>
+		<td rowspan="2"><b>Rotate</b></td>
+		<td><i>number</i> + <b>r</b></td>
+		<td>to rotate all the windows in the current tab clockwise.</td>
+	</tr>
+		<tr>
+		<td><i>number</i> + <b>R</b></td>
+		<td>to rotate all the windows in the current tab anticlockwise.</td>
 	</tr>
 	<tr>
 		<td rowspan="1"><b>Jump</b></td>
