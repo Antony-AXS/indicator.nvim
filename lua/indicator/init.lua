@@ -278,17 +278,16 @@ M.triggerWindowManager = function()
 			vim.notify(msg_1 .. "\n" .. msg_2, vim.log.levels.WARN)
 		end
 
-		local success, errorMessage = pcall(function()
+		local _, errorMessage = pcall(function()
 			vim.api.nvim_exec2(command, { output = true })
 		end)
 
-		local re_ind_flg
+		local re_ind_flg = true
 
-		if success then
-			re_ind_flg = true
-		else
+		if errorMessage then
 			re_ind_flg = false
-			vim.notify(tostring(errorMessage), vim.log.levels.WARN)
+			local message = tostring(errorMessage)
+			vim.notify(message, vim.log.levels.WARN)
 		end
 
 		for _, win_res in ipairs(const.disp_ind_win_meta) do
@@ -299,24 +298,48 @@ M.triggerWindowManager = function()
 			end
 		end
 
-		if key and re_ind_flg and string.match(key, "[bhjklrt]") then
+		if re_ind_flg and key and string.match(key, "[brtHJKL]") then
 			local all_win_meta = const.cache
-			for i = 1, #vim.api.nvim_tabpage_list_wins(0) do
-				local win_meta = all_win_meta[tostring(i)]
-				if win_meta then
-					local win_id = win_meta.par_id
-					indicator(1000, win_id, true, false, i)
+
+			local function triggerReIndication()
+				for i = 1, #vim.api.nvim_tabpage_list_wins(0) do
+					local win_meta = all_win_meta[tostring(i)]
+					if win_meta then
+						local win_id = win_meta.par_id
+						indicator(1000, win_id, true, false, i)
+					end
 				end
 			end
 
-			-- while const.filp_switch do
-			-- 	local timer = vim.loop.new_timer()
-			-- 	timer:start(5000, 0, function()
-			-- 		print("This will not run if the timer is stopped.")
-			-- 	end)
-			-- end
-		end
+			triggerReIndication()
 
+			local timer_id
+			local function start_new_timer()
+				if timer_id then
+					vim.fn.timer_stop(timer_id)
+				end
+
+				timer_id = vim.fn.timer_start(1000, function()
+					vim.api.nvim_input("<Esc>")
+				end)
+			end
+
+			local function reInitate()
+				vim.defer_fn(function()
+					local char = vim.fn.nr2char(vim.fn.getchar())
+					start_new_timer()
+					if char == "r" then
+						vim.cmd("wincmd r")
+						triggerReIndication()
+						reInitate()
+					else
+						triggerReIndication()
+					end
+				end, 10)
+				return 0
+			end
+			reInitate()
+		end
 		const.disp_ind_win_meta = {}
 	end)
 end
