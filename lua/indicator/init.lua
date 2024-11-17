@@ -298,11 +298,12 @@ M.triggerWindowManager = function()
 			end
 		end
 
-		if re_ind_flg and key and string.match(key, "[brtHJKL]") then
+		if re_ind_flg and key and string.match(key, "[brtHJKLR]") then
 			local all_win_meta = const.cache
+			local win_limit = #vim.api.nvim_tabpage_list_wins(0)
 
 			local function triggerReIndication()
-				for i = 1, #vim.api.nvim_tabpage_list_wins(0) do
+				for i = 1, win_limit do
 					local win_meta = all_win_meta[tostring(i)]
 					if win_meta then
 						local win_id = win_meta.par_id
@@ -328,12 +329,25 @@ M.triggerWindowManager = function()
 				vim.defer_fn(function()
 					start_new_timer()
 					local char = vim.fn.nr2char(vim.fn.getchar())
-					if char == "r" then
-						vim.cmd("wincmd r")
+					if string.match(char, "[rR]") then
+						vim.cmd("wincmd" .. " " .. char)
 						triggerReIndication()
 						reInitate()
+					else
+						for i = 1, win_limit do
+							local win_meta = all_win_meta[tostring(i)]
+							if win_meta then
+								local win_id = win_meta.win_id
+								if vim.api.nvim_win_is_valid(win_id) then
+									vim.api.nvim_win_close(win_id, true)
+									const.open_win_count = const.open_win_count - 1
+									const.cache[tostring(i)].status = 0
+								end
+							end
+						end
 					end
 				end, 10)
+
 				return 0
 			end
 
