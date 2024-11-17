@@ -25,6 +25,7 @@ return {
 		["p"] = { false },
 		["q"] = { false },
 		["r"] = { false },
+		["R"] = { false },
 		["s"] = { false },
 		["t"] = { false },
 		["v"] = { false },
