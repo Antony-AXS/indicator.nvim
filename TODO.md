@@ -5,7 +5,9 @@
 
 - [x] Indications for Window Management Operations
 
-- [ ] Re-indication After Window Shifting Operations
+- [x] Re-indication After Window Shifting Operations
+
+- [x] Enhanced Rotation Feedback with Initial Re-display
 
 - [ ] Static Cursor State Indication in Current Window
 
