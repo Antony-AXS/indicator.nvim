@@ -326,18 +326,17 @@ M.triggerWindowManager = function()
 
 			local function reInitate()
 				vim.defer_fn(function()
-					local char = vim.fn.nr2char(vim.fn.getchar())
 					start_new_timer()
+					local char = vim.fn.nr2char(vim.fn.getchar())
 					if char == "r" then
 						vim.cmd("wincmd r")
 						triggerReIndication()
 						reInitate()
-					else
-						triggerReIndication()
 					end
 				end, 10)
 				return 0
 			end
+
 			reInitate()
 		end
 		const.disp_ind_win_meta = {}
