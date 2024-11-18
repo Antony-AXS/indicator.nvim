@@ -78,11 +78,33 @@ CONTENTS                                                                        
     |triggerWindowManager|({null})
 
      - This function mimics the built-in Neovim window management system.
-     - Only the 'jump' and 'close' features are available.
+     - 'jump', 'close', 'shift' and 'rotate' features are available.
      - Visually indicates the window |number| on top of each window in a tab.
-     - Use <*number* + |w|> to jump to the desired window.
-     - Use <*number* + |q|> to close the desired window .
-     - Use <*number* + |o|> to close all windows expect the one you want to be open.
+
+     FEATURES ALAVILABLE:
+      JUMP *(ACTION)*:
+       . Use <*number* + |b|> to jump to the bottom-right window.
+       . Use <*number* + |t|> to jump to the top-left window.
+       . Use <*number* + |w|> to jump to the desired window.
+       . Use < |p| > to jump to the previous window (like a toggle).
+
+      SHIFT *(ACTION)*:
+       . Use <*number* + |H|> to shift the desired window to the left end.
+       . Use <*number* + |J|> to shift the desired window to the bottom.
+       . Use <*number* + |K|> to shift the desired window to the top.
+       . Use <*number* + |L|> to shift the desired window to the right end.
+
+      CLOSE *(ACTION)*:
+       . Use <*number* + |q|> to quit the desired window.
+       . Use <*number* + |c|> to close the desired window.
+       . Use <*number* + |o|> to close all windows expect the one you want to be open.
+
+      ROTATE *(ACTION)*:
+       . Use <*number* + |r|> to rotate all the windows in the current tab clockswise.
+       . Use <*number* + |R|> to rotate all the windows in the current tab anticlockswise.
+
+     NOTE: The *number* field is optional. If omitted, the action will be executed
+     in the window where the cursor is currently located.
 
      Parameters:
       . {null} : not accepting any |parameters| as of now
@@ -106,5 +128,20 @@ CONTENTS                                                                        
                 end
               }
 <
+   packer.nvim :
+>lua
+         use {
+               "Antony-AXS/indicator.nvim",
+               event = "VimEnter",
+               requires = { "nvim-lua/plenary.nvim" },
+               config = function()
+                 local Indicator = require("indicator")
+                 Indicator.setup({
+                   indicator_event = true, -- turns ON the Indicator feature by default
+                   window_highlight_event = false,
+                 })
+               end
+            }
+
 ---------------------------------------------------------------------------------------------------------
 vim:tw=80:ts=2:ft=help:norl:syntax=help:autoindent:
