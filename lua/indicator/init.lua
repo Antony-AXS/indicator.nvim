@@ -29,17 +29,15 @@ local indicator = function(timer, win_id, bloat, disp_win_cls, win_num)
 	local height
 	local width
 
-	if not curr_win_config.focusable then
+	if rawget(curr_win_config, "zindex") then
 		return 1
 	end
 
 	if const.cache[num] == nil then
 		const.cache[num] = {}
-	else
-		if vim.api.nvim_win_is_valid(const.cache[num].win_id) then
-			vim.api.nvim_win_close(const.cache[num].win_id, true)
-			const.open_win_count = const.open_win_count - 1
-		end
+	elseif vim.api.nvim_win_is_valid(const.cache[num].win_id) then
+		vim.api.nvim_win_close(const.cache[num].win_id, true)
+		const.open_win_count = const.open_win_count - 1
 	end
 
 	if #number > 1 then
@@ -259,10 +257,8 @@ M.triggerWindowManager = function()
 		local command
 		local cmd_str = "wincmd" .. " "
 
-		if valid_set[key] and not valid_set[key][1] then
+		if valid_set[key] and not valid_set[key] then
 			command = cmd_str .. digit .. key
-		elseif valid_set[key] and valid_set[key][1] then
-			command = cmd_str .. digit .. string.upper(key)
 		elseif string.match(digit, "^%d%d$") then
 			command = ""
 			local msg = "Indicator.nvim [WARNING]: Digit limit exceeded."
