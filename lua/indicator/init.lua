@@ -257,7 +257,7 @@ M.triggerWindowManager = function()
 		local command
 		local cmd_str = "wincmd" .. " "
 
-		if valid_set[key] and not valid_set[key] then
+		if valid_set[key] then
 			command = cmd_str .. digit .. key
 		elseif string.match(digit, "^%d%d$") then
 			command = ""
