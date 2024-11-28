@@ -236,16 +236,16 @@ M.triggerWindowManager = function()
 		local digit_count = 0
 		while true do
 			local char = vim.fn.nr2char(vim.fn.getchar())
-			local not_digit = string.match(char, "%D")
+			local is_digit = string.match(char, "%d")
 			local valid_char = valid_set[char]
 
-			if not_digit and not valid_char then
-				table.insert(tbl, "x")
-				break
-			elseif not_digit and valid_char then
+			if valid_char then
 				key = char
 				break
-			elseif digit_count < const.wmgr_num_lmt then
+			elseif not valid_char then
+				table.insert(tbl, "x")
+				break
+			elseif is_digit and digit_count < const.wmgr_nlmt then
 				table.insert(tbl, char)
 				digit_count = digit_count + 1
 			else
@@ -257,7 +257,10 @@ M.triggerWindowManager = function()
 		local command
 		local cmd_str = "wincmd" .. " "
 
-		if valid_set[key] then
+		if valid_set[key] and valid_set[key]["sft"] then
+			command = cmd_str .. key
+			vim.cmd(cmd_str .. digit .. "w")
+		elseif valid_set[key] then
 			command = cmd_str .. digit .. key
 		elseif string.match(digit, "^%d%d$") then
 			command = ""
