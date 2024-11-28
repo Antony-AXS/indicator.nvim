@@ -242,7 +242,7 @@ M.triggerWindowManager = function()
 			if valid_char then
 				key = char
 				break
-			elseif not valid_char then
+			elseif not is_digit and not valid_char then
 				table.insert(tbl, "x")
 				break
 			elseif is_digit and digit_count < const.wmgr_nlmt then
