@@ -1,7 +1,7 @@
 local popup = require("plenary.popup")
 local M = {}
 
----@param content string|nil
+---@param content table
 M.create_float_window = function(content)
 	local buf = vim.api.nvim_create_buf(false, true) -- {listed: false, scratch: true}
 
@@ -103,7 +103,7 @@ M.create_float_window_V2 = function(content, options)
 
 	if options and options.title then
 		vim.api.nvim_set_hl(0, "TitleWinBorder", { bg = nil, fg = "#3cb9fc" })
-		local popup_win_id, win = popup.create(bufnr, {
+		local popup_win_id, _ = popup.create(bufnr, {
 			title = options.title,
 			line = y_pos,
 			col = x_pos,
