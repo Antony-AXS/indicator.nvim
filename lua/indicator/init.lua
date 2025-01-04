@@ -58,8 +58,8 @@ M.indicateAll = function(timer)
 end
 
 M.indicator_event_activate = function()
-	if const.autocmd_id == nil then
-		const.autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
+	if const.indi_autocmd_id == 0 then
+		const.indi_autocmd_id = vim.api.nvim_create_autocmd("WinEnter", {
 			desc = "Trigger always when entering a new Buffer",
 			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
 			callback = function()
@@ -67,18 +67,18 @@ M.indicator_event_activate = function()
 			end,
 		})
 		if const.indicator_notify then
-			vim.notify("Indicator Event Triggered", vim.log.levels.INFO)
+			vim.notify("Indicator Event Enabled", vim.log.levels.INFO)
 		end
 	else
-		vim.notify("Indicator Event Already Triggered", vim.log.levels.INFO)
+		vim.notify("Indicator Event Already Enabled", vim.log.levels.INFO)
 	end
 	const.indicator_notify = true
 end
 
 M.indicator_event_deactivate = function()
-	if const.autocmd_id then
-		vim.api.nvim_del_autocmd(const.autocmd_id)
-		const.autocmd_id = nil
+	if const.indi_autocmd_id ~= 0 then
+		vim.api.nvim_del_autocmd(const.indi_autocmd_id)
+		const.indi_autocmd_id = 0
 		vim.notify("Indicator Event Disabled", vim.log.levels.INFO)
 	else
 		vim.notify("Indicator Event already Disabled", vim.log.levels.INFO)
@@ -87,7 +87,7 @@ M.indicator_event_deactivate = function()
 end
 
 M.window_highlight_event_activate = function()
-	if const.win_hilght_acmd_id == nil then
+	if const.win_hilght_acmd_id == 0 then
 		const.win_hilght_acmd_id = vim.api.nvim_create_autocmd("WinEnter", { callback = window_highlight })
 		if const.window_notify then
 			vim.notify("Window HighLight Enabled", vim.log.levels.INFO)
@@ -99,9 +99,9 @@ M.window_highlight_event_activate = function()
 end
 
 M.window_highlight_event_deactivate = function()
-	if const.win_hilght_acmd_id ~= nil then
+	if const.win_hilght_acmd_id ~= 0 then
 		vim.api.nvim_del_autocmd(const.win_hilght_acmd_id)
-		const.win_hilght_acmd_id = nil
+		const.win_hilght_acmd_id = 0
 		vim.notify("Window HighLight Disabled", vim.log.levels.INFO)
 	else
 		vim.notify("Window HighLight Already Disabled", vim.log.levels.INFO)
@@ -275,10 +275,12 @@ end, { nargs = "?" })
 ---@param config table
 M.setup = function(config)
 	if config.indicator_event then
+		const.indicator_notify = false
 		M.indicator_event_activate()
 	end
 
 	if config.window_highlight_event then
+		const.window_notify = false
 		M.window_highlight_event_activate()
 	end
 
