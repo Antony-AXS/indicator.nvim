@@ -1,14 +1,14 @@
 return {
 	cache = {},
-	autocmd_id = nil,
 	wmgr_nlmt = 2,
 	open_win_count = 0,
 	window_timer = 300,
+	indi_autocmd_id = 0,
 	indicator_timer = 1500,
-	window_notify = false,
-	indicator_notify = false,
+	window_notify = true,
+	indicator_notify = true,
+	win_hilght_acmd_id = 0,
 	disp_ind_win_meta = {},
-	win_hilght_acmd_id = nil,
 	win_mngr_valid_chrs = {
 		["b"] = { sft = false },
 		["c"] = { sft = false },
