@@ -4,6 +4,7 @@ return {
 	open_win_count = 0,
 	window_timer = 300,
 	indi_autocmd_id = 0,
+	wmgr_time_lmt = 1000,
 	indicator_timer = 1500,
 	window_notify = true,
 	indicator_notify = true,
