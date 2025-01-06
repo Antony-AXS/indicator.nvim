@@ -160,9 +160,8 @@ M.triggerWindowManager = function()
 			vim.notify(msg, vim.log.levels.WARN)
 		else
 			command = ""
-			local msg_1 = "Indicator.nvim [WARNING]: Invalid window management command,"
-			local msg_2 = "Only 'h', 'j', 'k', 'l', 'w', 'o', 'q' are considered valid."
-			vim.notify(msg_1 .. "\n" .. msg_2, vim.log.levels.WARN)
+			local msg = "Indicator.nvim [WARNING]: Invalid window management command."
+			vim.notify(msg, vim.log.levels.WARN)
 		end
 
 		local _, errorMessage = pcall(function()
@@ -177,29 +176,36 @@ M.triggerWindowManager = function()
 			vim.notify(message, vim.log.levels.WARN)
 		end
 
-		for _, win_res in ipairs(const.disp_ind_win_meta) do
-			if vim.api.nvim_win_is_valid(win_res.win_id) then
-				vim.api.nvim_win_close(win_res.win_id, true)
-				const.open_win_count = const.open_win_count - 1
-				const.cache[win_res.num].status = 0
+		local function closePrevIndicators()
+			for _, win_res in ipairs(const.disp_ind_win_meta) do
+				if vim.api.nvim_win_is_valid(win_res.win_id) then
+					vim.api.nvim_win_close(win_res.win_id, true)
+					const.open_win_count = const.open_win_count - 1
+					const.cache[win_res.num].status = 0
+				end
 			end
+			const.disp_ind_win_meta = {}
 		end
+
+		closePrevIndicators()
 
 		if re_ind_flg and key and string.match(key, "[brtHJKLR]") then
 			local all_win_meta = const.cache
+			local wmgr_time_lmt = const.wmgr_time_lmt
 			local win_limit = #vim.api.nvim_tabpage_list_wins(0)
 
-			local function triggerReIndication()
+			---@param auto_close boolean
+			local function triggerReIndication(auto_close)
 				for i = 1, win_limit do
 					local win_meta = all_win_meta[tostring(i)]
 					if win_meta then
 						local win_id = win_meta.par_id
-						indicator.generate(1000, win_id, true, false, i)
+						indicator.generate(wmgr_time_lmt, win_id, true, auto_close, i)
 					end
 				end
 			end
 
-			triggerReIndication()
+			triggerReIndication(false)
 
 			local timer_id
 			local function start_new_timer()
@@ -207,8 +213,9 @@ M.triggerWindowManager = function()
 					vim.fn.timer_stop(timer_id)
 				end
 
-				timer_id = vim.fn.timer_start(1000, function()
+				timer_id = vim.fn.timer_start(wmgr_time_lmt, function()
 					vim.api.nvim_input("<Esc>")
+					closePrevIndicators()
 				end)
 			end
 
@@ -218,7 +225,8 @@ M.triggerWindowManager = function()
 					local char = vim.fn.nr2char(vim.fn.getchar())
 					if string.match(char, "[rR]") then
 						vim.cmd("wincmd" .. " " .. char)
-						triggerReIndication()
+						closePrevIndicators()
+						triggerReIndication(true)
 						reInitate()
 					else
 						for i = 1, win_limit do
