@@ -133,11 +133,11 @@ Set a keymap to trigger the function *triggerWindowManager*, and then use key co
 	<tr>
 		<td rowspan="2"><b>Rotate</b></td>
 		<td><i>number</i> + <b>r</b></td>
-		<td>to rotate all the windows in the current tab clockwise.</td>
+		<td>To continuously rotate all windows in the current tab 'clockwise' until the rotation instance expires (expiration only happens only after the indicators disappear).</td>
 	</tr>
 		<tr>
 		<td><i>number</i> + <b>R</b></td>
-		<td>to rotate all the windows in the current tab anticlockwise.</td>
+		<td>To continuously rotate all windows in the current tab 'anticlockwise' until the rotation instance expires.</td>
 	</tr>
 	<tr>
 		<td rowspan="1"><b>Jump</b></td>
