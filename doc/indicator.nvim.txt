@@ -14,9 +14,9 @@ indicator.nvim.txt                      Plugin Documentation
 
 |INTRODUCTION|                                                                      indicator.nvim
 
-Indicator.nvim is a lightweight plugin that displays window numbers on the screen, 
-making it easy to navigate through windows in a tab.
-It also highlights the window you jump into, enhancing your navigation experience.
+ Indicator.nvim is a lightweight plugin that displays window numbers on the screen, 
+ making it easy to navigate through windows in a tab.
+ It also highlights the window you jump into, enhancing your navigation experience.
 
 =========================================================================================================
 
@@ -81,7 +81,7 @@ CONTENTS                                                                        
      - 'jump', 'close', 'shift' and 'rotate' features are available.
      - Visually indicates the window |number| on top of each window in a tab.
 
-     FEATURES ALAVILABLE:
+     FEATURES AVAILABLE:
       JUMP *(ACTION)*:
        . Use <*number* + |b|> to jump to the bottom-right window.
        . Use <*number* + |t|> to jump to the top-left window.
@@ -100,8 +100,8 @@ CONTENTS                                                                        
        . Use <*number* + |o|> to close all windows expect the one you want to be open.
 
       ROTATE *(ACTION)*:
-       . Use <*number* + |r|> to rotate all the windows in the current tab clockswise.
-       . Use <*number* + |R|> to rotate all the windows in the current tab anticlockswise.
+       . Use < |r| > to rotate all the windows in the current tab clockswise.
+       . Use < |R| > to rotate all the windows in the current tab anticlockswise.
 
      NOTE: The *number* field is optional. If omitted, the action will be executed
      in the window where the cursor is currently located.
