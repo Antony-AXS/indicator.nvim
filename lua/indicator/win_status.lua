@@ -64,9 +64,9 @@ local window_count = function(position, color, tbl)
 					Icon
 					.. vim.fn.winnr()
 					.. "|"
-					.. (#vim.api.nvim_tabpage_list_wins(0))
+					.. (#vim.api.nvim_tabpage_list_wins(0) - const.open_win_count)
 					.. "|"
-					.. (#vim.api.nvim_list_wins())
+					.. (#vim.api.nvim_list_wins() - const.open_win_count)
 				)
 			end
 		end,
