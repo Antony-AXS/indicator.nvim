@@ -103,6 +103,10 @@ CONTENTS                                                                        
        . Use < |r| > to rotate all the windows in the current tab clockswise.
        . Use < |R| > to rotate all the windows in the current tab anticlockswise.
 
+       . You can press |'r'| or |'R'| repeatedly to activate continuous rotation.
+         During this mode, the initial value will be consistently re-indicated
+         until the rotation instance reaches its expiration or is manually terminated.
+
      NOTE: The *number* field is optional. If omitted, the action will be executed
      in the window where the cursor is currently located.
 
