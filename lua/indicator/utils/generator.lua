@@ -7,8 +7,8 @@ local M = {}
 ---@param timer number|nil
 ---@param win_id number|nil
 ---@param bloat boolean
----@param disp_win_cls boolean
-M.generate = function(timer, win_id, bloat, disp_win_cls, win_num)
+---@param auto_close boolean
+M.generate = function(timer, win_id, bloat, auto_close, win_num)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 
 	if not vim.api.nvim_win_is_valid(curr_win_id) then
@@ -101,7 +101,7 @@ M.generate = function(timer, win_id, bloat, disp_win_cls, win_num)
 		const.cache[num].status = 1
 	end
 
-	if disp_win_cls then
+	if not auto_close then
 		table.insert(const.disp_ind_win_meta, { num = num, win_id = win_res.win_id })
 		return
 	else
