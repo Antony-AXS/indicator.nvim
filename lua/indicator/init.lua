@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufEnter" }, {
 
 ---@param timer number|nil
 M.indicateCurrent = function(timer)
-	indicator.generate(timer, nil, true, false)
+	indicator.generate(timer, nil, true, true)
 end
 
 ---@param timer number|nil
@@ -53,7 +53,7 @@ M.indicateAll = function(timer)
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
 	for _, win_id in ipairs(window_ids) do
-		indicator.generate(timer, win_id, true, false)
+		indicator.generate(timer, win_id, true, true)
 	end
 end
 
@@ -63,7 +63,7 @@ M.indicator_event_activate = function()
 			desc = "Trigger always when entering a new Buffer",
 			group = vim.api.nvim_create_augroup("window-indicator-function", { clear = true }),
 			callback = function()
-				indicator.generate(500, nil, true, false)
+				indicator.generate(500, nil, true, true)
 			end,
 		})
 		if const.indicator_notify then
@@ -114,7 +114,7 @@ M.triggerWindowManager = function()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
 	for _, win_id in ipairs(window_ids) do
-		indicator.generate(nil, win_id, true, true)
+		indicator.generate(nil, win_id, true, false)
 	end
 
 	vim.schedule(function()
@@ -205,7 +205,7 @@ M.triggerWindowManager = function()
 				end
 			end
 
-			triggerReIndication(false)
+			triggerReIndication(true)
 
 			local timer_id
 			local function start_new_timer()
@@ -222,11 +222,13 @@ M.triggerWindowManager = function()
 			local function reInitate()
 				vim.defer_fn(function()
 					start_new_timer()
-					local char = vim.fn.nr2char(vim.fn.getchar())
+					local chrStr = vim.fn.getcharstr()
+					local char = vim.api.nvim_replace_termcodes(chrStr, true, true, true)
+
 					if string.match(char, "[rR]") then
 						vim.cmd("wincmd" .. " " .. char)
 						closePrevIndicators()
-						triggerReIndication(true)
+						triggerReIndication(false)
 						reInitate()
 					else
 						for i = 1, win_limit do
