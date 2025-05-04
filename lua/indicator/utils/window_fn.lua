@@ -1,5 +1,9 @@
-local popup = require("plenary.popup")
+opup = require("plenary.popup")
 local M = {}
+
+local hghlhtGroupName = "IndicatorAsciiArt"
+local ns = vim.api.nvim_create_namespace("ascii_art")
+vim.api.nvim_set_hl(0, hghlhtGroupName, { fg = "#FFD700", bg = nil, bold = true })
 
 ---@param content table
 M.create_float_window = function(content)
@@ -156,6 +160,16 @@ M.create_float_window_V2 = function(content, options)
 	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = bufnr })
 	vim.api.nvim_set_option_value("modifiable", if_modifiable, { buf = bufnr })
 	vim.api.nvim_set_option_value("cursorline", if_cursorline, { win = win_id })
+
+	if options.curr_win_id == vim.api.nvim_get_current_win() then
+		for row, line in ipairs(content) do
+			vim.api.nvim_buf_set_extmark(bufnr, ns, row - 1, 0, {
+				end_row = row - 1,
+				end_col = #line,
+				hl_group = hghlhtGroupName,
+			})
+		end
+	end
 
 	return { bufnr = bufnr, win_id = win_id }
 end
