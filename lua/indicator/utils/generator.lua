@@ -80,6 +80,7 @@ M.generate = function(timer, win_id, bloat, auto_close, win_num)
 	local win_res = win_fn.create_float_window_V2(content, {
 		focus = false, -- mandatory field
 		highlight = highlight_color,
+		curr_win_id = curr_win_id,
 		border = nil,
 		position = {
 			type = "dynamic",
@@ -97,6 +98,7 @@ M.generate = function(timer, win_id, bloat, auto_close, win_num)
 	if win_res ~= nil and win_res.win_id ~= nil then
 		const.open_win_count = const.open_win_count + 1
 		const.cache[num].win_id = win_res.win_id
+		const.cache[num].bufnr = win_res.bufnr
 		const.cache[num].par_id = curr_win_id
 		const.cache[num].status = 1
 	end
