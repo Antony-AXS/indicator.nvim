@@ -189,7 +189,7 @@ M.triggerWindowManager = function()
 
 		closePrevIndicators()
 
-		if re_ind_flg and key and string.match(key, "[brtHJKLR]") then
+		if re_ind_flg and key and string.match(key, "[rHJKLR]") then
 			local all_win_meta = const.cache
 			local wmgr_time_lmt = const.wmgr_time_lmt
 			local win_limit = #vim.api.nvim_tabpage_list_wins(0)
@@ -216,6 +216,7 @@ M.triggerWindowManager = function()
 				timer_id = vim.fn.timer_start(wmgr_time_lmt, function()
 					vim.api.nvim_input("<Esc>")
 					closePrevIndicators()
+					const.cache = {}
 				end)
 			end
 
