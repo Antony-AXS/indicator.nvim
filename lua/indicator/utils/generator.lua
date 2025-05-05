@@ -8,7 +8,7 @@ local M = {}
 ---@param win_id number|nil
 ---@param bloat boolean
 ---@param auto_close boolean
-M.generate = function(timer, win_id, bloat, auto_close, win_num)
+M.generate = function(timer, win_id, bloat, auto_close, win_num, curr_win_hlgt)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 
 	if not vim.api.nvim_win_is_valid(curr_win_id) then
@@ -79,6 +79,7 @@ M.generate = function(timer, win_id, bloat, auto_close, win_num)
 
 	local win_res = win_fn.create_float_window_V2(content, {
 		focus = false, -- mandatory field
+		curr_win_hlgt = const.re_hlt_flg,
 		highlight = highlight_color,
 		curr_win_id = curr_win_id,
 		border = nil,
@@ -94,6 +95,8 @@ M.generate = function(timer, win_id, bloat, auto_close, win_num)
 			width = width,
 		},
 	})
+
+	const.re_hlt_flg = false
 
 	if win_res ~= nil and win_res.win_id ~= nil then
 		const.open_win_count = const.open_win_count + 1

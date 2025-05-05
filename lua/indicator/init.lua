@@ -114,6 +114,7 @@ M.triggerWindowManager = function()
 	local window_ids = vim.api.nvim_tabpage_list_wins(current_tabpage)
 
 	for _, win_id in ipairs(window_ids) do
+		const.re_hlt_flg = true
 		indicator.generate(nil, win_id, true, false)
 	end
 
@@ -164,6 +165,8 @@ M.triggerWindowManager = function()
 			vim.notify(msg, vim.log.levels.WARN)
 		end
 
+		const.re_hlt_flg = true
+
 		local _, errorMessage = pcall(function()
 			vim.api.nvim_exec2(command, { output = true })
 		end)
@@ -199,6 +202,7 @@ M.triggerWindowManager = function()
 				for i = 1, win_limit do
 					local win_meta = all_win_meta[tostring(i)]
 					if win_meta then
+						const.re_hlt_flg = true
 						local win_id = win_meta.par_id
 						indicator.generate(wmgr_time_lmt, win_id, true, auto_close, i)
 					end

@@ -6,6 +6,7 @@ return {
 	indi_autocmd_id = 0,
 	wmgr_time_lmt = 1000,
 	indicator_timer = 1500,
+	re_hlt_flg = false,
 	window_notify = true,
 	indicator_notify = true,
 	win_hilght_acmd_id = 0,
