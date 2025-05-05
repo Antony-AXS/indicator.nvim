@@ -147,9 +147,11 @@ M.triggerWindowManager = function()
 		local cmd_str = "wincmd" .. " "
 
 		if valid_set[key] and valid_set[key]["sft"] then
+			const.re_hlt_flg = true
 			command = cmd_str .. key
 			vim.cmd(cmd_str .. digit .. "w")
 		elseif valid_set[key] then
+			const.re_hlt_flg = true
 			command = cmd_str .. digit .. key
 		elseif string.match(digit, "^%d%d$") then
 			command = ""
@@ -164,8 +166,6 @@ M.triggerWindowManager = function()
 			local msg = "Indicator.nvim [WARNING]: Invalid window management command."
 			vim.notify(msg, vim.log.levels.WARN)
 		end
-
-		const.re_hlt_flg = true
 
 		local _, errorMessage = pcall(function()
 			vim.api.nvim_exec2(command, { output = true })
