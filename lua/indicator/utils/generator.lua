@@ -8,7 +8,7 @@ local M = {}
 ---@param win_id number|nil
 ---@param bloat boolean
 ---@param auto_close boolean
-M.generate = function(timer, win_id, bloat, auto_close, win_num, curr_win_hlgt)
+M.generate = function(timer, win_id, bloat, auto_close, win_num)
 	local curr_win_id = win_id or vim.api.nvim_get_current_win()
 
 	if not vim.api.nvim_win_is_valid(curr_win_id) then

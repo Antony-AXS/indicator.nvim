@@ -161,7 +161,7 @@ M.create_float_window_V2 = function(content, options)
 	vim.api.nvim_set_option_value("modifiable", if_modifiable, { buf = bufnr })
 	vim.api.nvim_set_option_value("cursorline", if_cursorline, { win = win_id })
 
-	if options.curr_win_id == vim.api.nvim_get_current_win() then
+	if options.curr_win_hlgt and options.curr_win_id == vim.api.nvim_get_current_win() then
 		for row, line in ipairs(content) do
 			vim.api.nvim_buf_set_extmark(bufnr, ns, row - 1, 0, {
 				end_row = row - 1,
