@@ -1,8 +1,8 @@
-opup = require("plenary.popup")
+local popup = require("plenary.popup")
 local M = {}
 
 local hghlhtGroupName = "IndicatorAsciiArt"
-local ns = vim.api.nvim_create_namespace("ascii_art")
+local ns = vim.api.nvim_create_namespace("indicator.nvim")
 vim.api.nvim_set_hl(0, hghlhtGroupName, { fg = "#FFD700", bg = nil, bold = true })
 
 ---@param content table
