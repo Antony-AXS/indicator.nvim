@@ -4,6 +4,9 @@ local status = require("indicator/win_status")
 
 local M = {}
 
+local namespace = vim.api.nvim_create_namespace("indicator.nvim")
+vim.api.nvim_set_hl(0, "IndicatorAsciiArt2", { fg = "#6e44ff", bg = nil, bold = true })
+
 local window_highlight = function()
 	vim.api.nvim_set_hl(0, "IndCurrWinHiglt", { bg = "#2c3135", fg = nil }) -- #36454F #2c3135 #29343b
 	vim.api.nvim_set_hl(0, "IndRestWinHiglt", { bg = nil, fg = nil })
@@ -137,6 +140,18 @@ M.triggerWindowManager = function()
 			elseif is_digit and digit_count < const.wmgr_nlmt then
 				table.insert(tbl, char)
 				digit_count = digit_count + 1
+
+				local bufnr = const.cache[tostring(char)].bufnr
+				local content = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+
+				for row, line in ipairs(content) do
+					vim.api.nvim_buf_set_extmark(bufnr, namespace, row - 1, 0, {
+						end_row = row - 1,
+						end_col = #line,
+						hl_group = "IndicatorAsciiArt2",
+					})
+				end
+				vim.cmd("redraw")
 			else
 				break
 			end
