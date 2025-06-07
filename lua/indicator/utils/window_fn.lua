@@ -1,9 +1,7 @@
 local popup = require("plenary.popup")
 local M = {}
 
-local hghlhtGroupName = "IndicatorAsciiArt"
 local ns = vim.api.nvim_create_namespace("indicator.nvim")
-vim.api.nvim_set_hl(0, hghlhtGroupName, { fg = "#FFD700", bg = nil, bold = true })
 
 ---@param content table
 M.create_float_window = function(content)
@@ -37,6 +35,9 @@ end
 ---@param content table
 ---@param options table
 M.create_float_window_V2 = function(content, options)
+	local hghlhtGrpName = "IndicatorAsciiArt"
+	vim.api.nvim_set_hl(0, hghlhtGrpName, { fg = "#FFD700", bg = nil, bold = true })
+
 	local bufnr = vim.api.nvim_create_buf(false, true)
 
 	local width = (options and options.size and options.size.width) or 90
