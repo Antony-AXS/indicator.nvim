@@ -167,7 +167,7 @@ M.create_float_window_V2 = function(content, options)
 			vim.api.nvim_buf_set_extmark(bufnr, ns, row - 1, 0, {
 				end_row = row - 1,
 				end_col = #line,
-				hl_group = hghlhtGroupName,
+				hl_group = hghlhtGrpName,
 			})
 		end
 	end
